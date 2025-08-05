@@ -6,101 +6,18 @@ import fs from 'fs-extra'
  */
 export class AuthApiGenerator {
   /**
-   * 生成认证中间件
+   * 生成认证工具函数
    */
-  static generateAuthMiddleware() {
-    return `import { createMiddleware } from '@tanstack/solid-router'
-import { authDb } from '../lib/auth/database'
-
-/**
- * Session 中间件 - 检查用户认证状态
- */
-export const sessionMiddleware = createMiddleware().server(async ({ request, next }) => {
-  // 清理过期 sessions
-  authDb.cleanupExpiredSessions()
-  
-  // 从 cookie 获取 session ID
-  const cookies = request.headers.get('cookie')
-  const sessionId = cookies
-    ?.split(';')
-    .find(c => c.trim().startsWith('session='))
-    ?.split('=')[1]
-  
-  let user = null
-  
-  if (sessionId) {
-    const sessionData = authDb.getSessionWithUser(sessionId)
-    if (sessionData) {
-      user = {
-        id: sessionData.user.id,
-        email: sessionData.user.email,
-        name: sessionData.user.name,
-        role: sessionData.user.role,
-        avatar: sessionData.user.avatar,
-        created_at: sessionData.user.created_at
-      }
-    }
-  }
-  
-  // 将用户信息添加到请求上下文
-  const response = await next()
-  
-  // 添加用户信息到响应头（可选）
-  if (user) {
-    response.headers.set('X-User-ID', user.id.toString())
-  }
-  
-  return response
-})
-
-/**
- * 需要认证的路由保护中间件
- */
-export const requireAuth = createMiddleware().server(async ({ request, next }) => {
-  const cookies = request.headers.get('cookie')
-  const sessionId = cookies
-    ?.split(';')
-    .find(c => c.trim().startsWith('session='))
-    ?.split('=')[1]
-  
-  if (!sessionId) {
-    return new Response('Unauthorized', { status: 401 })
-  }
-  
-  const sessionData = authDb.getSessionWithUser(sessionId)
-  if (!sessionData) {
-    return new Response('Unauthorized', { status: 401 })
-  }
-  
-  return next()
-})
-
-/**
- * 管理员权限中间件
- */
-export const requireAdmin = createMiddleware().server(async ({ request, next }) => {
-  const cookies = request.headers.get('cookie')
-  const sessionId = cookies
-    ?.split(';')
-    .find(c => c.trim().startsWith('session='))
-    ?.split('=')[1]
-  
-  if (!sessionId) {
-    return new Response('Unauthorized', { status: 401 })
-  }
-  
-  const sessionData = authDb.getSessionWithUser(sessionId)
-  if (!sessionData || sessionData.user.role !== 'admin') {
-    return new Response('Forbidden', { status: 403 })
-  }
-  
-  return next()
-})
+  static generateAuthUtils() {
+    return `import { authDb } from '../lib/auth/database'
 
 /**
  * 获取当前用户的工具函数
  */
 export function getCurrentUser(request: Request) {
+  // 清理过期 sessions
+  authDb.cleanupExpiredSessions()
+  
   const cookies = request.headers.get('cookie')
   const sessionId = cookies
     ?.split(';')
@@ -120,6 +37,28 @@ export function getCurrentUser(request: Request) {
     avatar: sessionData.user.avatar,
     created_at: sessionData.user.created_at
   }
+}
+
+/**
+ * 检查用户是否已认证
+ */
+export function requireAuth(request: Request) {
+  const user = getCurrentUser(request)
+  if (!user) {
+    throw new Response('Unauthorized', { status: 401 })
+  }
+  return user
+}
+
+/**
+ * 检查用户是否为管理员
+ */
+export function requireAdmin(request: Request) {
+  const user = requireAuth(request)
+  if (user.role !== 'admin') {
+    throw new Response('Forbidden', { status: 403 })
+  }
+  return user
 }`
   }
 
@@ -127,10 +66,10 @@ export function getCurrentUser(request: Request) {
    * 生成登录 API
    */
   static generateLoginApi() {
-    return `import { json, createAPIFileRoute } from '@tanstack/solid-router'
+    return `import { json, createFileRoute } from '@tanstack/solid-router'
 import { authDb } from '../../../lib/auth/database'
 
-export const Route = createAPIFileRoute('/api/auth/login')({
+export const Route = createFileRoute('/api/auth/login')({
   POST: async ({ request }: { request: Request }) => {
     try {
     const { email, password } = await request.json()
@@ -179,10 +118,10 @@ export const Route = createAPIFileRoute('/api/auth/login')({
    * 生成注册 API
    */
   static generateRegisterApi() {
-    return `import { json, createAPIFileRoute } from '@tanstack/solid-router'
+    return `import { json, createFileRoute } from '@tanstack/solid-router'
 import { authDb } from '../../../lib/auth/database'
 
-export const Route = createAPIFileRoute('/api/auth/register')({
+export const Route = createFileRoute('/api/auth/register')({
   POST: async ({ request }: { request: Request }) => {
   try {
     const { email, password, name } = await request.json()
@@ -249,10 +188,10 @@ export const Route = createAPIFileRoute('/api/auth/register')({
    * 生成登出 API
    */
   static generateLogoutApi() {
-    return `import { json, createAPIFileRoute } from '@tanstack/solid-router'
+    return `import { json, createFileRoute } from '@tanstack/solid-router'
 import { authDb } from '../../../lib/auth/database'
 
-export const Route = createAPIFileRoute('/api/auth/logout')({
+export const Route = createFileRoute('/api/auth/logout')({
   POST: async ({ request }: { request: Request }) => {
   try {
     // 从 cookie 获取 session ID
@@ -287,10 +226,10 @@ export const Route = createAPIFileRoute('/api/auth/logout')({
    * 生成获取当前用户 API
    */
   static generateMeApi() {
-    return `import { json, createAPIFileRoute } from '@tanstack/solid-router'
-import { getCurrentUser } from '../../../middleware/auth'
+    return `import { json, createFileRoute } from '@tanstack/solid-router'
+import { getCurrentUser } from '../../../utils/auth'
 
-export const Route = createAPIFileRoute('/api/auth/me')({
+export const Route = createFileRoute('/api/auth/me')({
   GET: async ({ request }: { request: Request }) => {
   try {
     const user = getCurrentUser(request)
@@ -318,9 +257,9 @@ export const Route = createAPIFileRoute('/api/auth/me')({
     const apiDir = join(projectPath, 'src', 'routes', 'api', 'auth')
     await fs.ensureDir(apiDir)
     
-    // 创建中间件目录
-    const middlewareDir = join(projectPath, 'src', 'middleware')
-    await fs.ensureDir(middlewareDir)
+    // 创建工具目录
+    const utilsDir = join(projectPath, 'src', 'utils')
+    await fs.ensureDir(utilsDir)
     
     // 生成 API 文件
     await fs.writeFile(join(apiDir, 'login.ts'), this.generateLoginApi())
@@ -328,7 +267,7 @@ export const Route = createAPIFileRoute('/api/auth/me')({
     await fs.writeFile(join(apiDir, 'logout.ts'), this.generateLogoutApi())
     await fs.writeFile(join(apiDir, 'me.ts'), this.generateMeApi())
     
-    // 生成中间件
-    await fs.writeFile(join(middlewareDir, 'auth.ts'), this.generateAuthMiddleware())
+    // 生成认证工具函数
+    await fs.writeFile(join(utilsDir, 'auth.ts'), this.generateAuthUtils())
   }
 }

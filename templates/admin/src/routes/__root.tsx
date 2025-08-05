@@ -6,7 +6,7 @@ import {
   HeadContent,
   Scripts,
   ErrorComponent,
-} from '@tanstack/solid-router'
+} from '@tanstack/solid-start'
 import { DefaultCatchBoundary } from '../components/DefaultCatchBoundary'
 import { NotFound } from '../components/NotFound'
 import '../styles/app.css'

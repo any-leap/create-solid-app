@@ -1,8 +1,10 @@
-import { createFileRoute } from '@tanstack/solid-router'
+import { createFileRoute } from '@tanstack/solid-start'
 
 export const Route = createFileRoute('/')({
   component: AdminDashboard,
 })
+
+import { Button } from '~/components/ui/Button'
 
 function AdminDashboard() {
   return (
@@ -22,7 +24,7 @@ function AdminDashboard() {
                 </div>
               </div>
             </div>
-            
+
             {/* Header Actions */}
             <div class="flex items-center space-x-4">
               <div class="relative">
@@ -34,7 +36,7 @@ function AdminDashboard() {
                   <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
                 </button>
               </div>
-              
+
               <div class="flex items-center space-x-3">
                 <span class="text-sm text-gray-700">欢迎回来，</span>
                 <span class="text-sm font-medium text-gray-900">管理员</span>
@@ -54,9 +56,9 @@ function AdminDashboard() {
             <div>
               <h2 class="text-2xl font-bold mb-2">🎉 欢迎使用管理后台</h2>
               <p class="text-blue-100 mb-4">今天是美好的一天，让我们一起管理您的应用吧！</p>
-              <button class="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors">
+              <Button class="bg-white text-blue-600 hover:bg-blue-50 font-medium">
                 查看最新功能
-              </button>
+              </Button>
             </div>
             <div class="hidden md:block">
               <div class="w-32 h-32 bg-white/10 rounded-full flex items-center justify-center">
@@ -68,33 +70,33 @@ function AdminDashboard() {
 
         {/* Enhanced Stats Grid */}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <StatCard 
-            title="总用户数" 
-            value="1,234" 
-            change="+12%" 
+          <StatCard
+            title="总用户数"
+            value="1,234"
+            change="+12%"
             changeType="positive"
             icon="👥"
             color="blue"
           />
-          <StatCard 
-            title="今日访问" 
-            value="856" 
-            change="+8%" 
+          <StatCard
+            title="今日访问"
+            value="856"
+            change="+8%"
             changeType="positive"
             icon="📈"
             color="green"
           />
-          <StatCard 
-            title="总收入" 
-            value="¥89,420" 
-            change="+15%" 
+          <StatCard
+            title="总收入"
+            value="¥89,420"
+            change="+15%"
             changeType="positive"
             icon="💰"
             color="purple"
           />
-          <StatCard 
-            title="活跃订单" 
-            value="342" 
+          <StatCard
+            title="活跃订单"
+            value="342"
             change="-2%"
             changeType="negative"
             icon="📦"
@@ -109,7 +111,7 @@ function AdminDashboard() {
             <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div class="flex items-center justify-between mb-6">
                 <h3 class="text-lg font-semibold text-gray-900">⚡ 快速操作</h3>
-                <button class="text-sm text-blue-600 hover:text-blue-700">查看全部</button>
+                <Button variant="ghost" size="sm" class="text-blue-600 hover:text-blue-700 p-0 h-auto">查看全部</Button>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <ActionCard icon="👥" title="用户管理" description="管理用户账户和权限" />
@@ -127,34 +129,38 @@ function AdminDashboard() {
               <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             </div>
             <div class="space-y-4">
-              <ActivityItem 
-                action="新用户注册" 
-                user="张三" 
+              <ActivityItem
+                action="新用户注册"
+                user="张三"
                 time="5分钟前"
                 type="user"
               />
-              <ActivityItem 
-                action="订单创建" 
-                user="李四" 
+              <ActivityItem
+                action="订单创建"
+                user="李四"
                 time="10分钟前"
                 type="order"
               />
-              <ActivityItem 
-                action="数据导出" 
-                user="王五" 
+              <ActivityItem
+                action="数据导出"
+                user="王五"
                 time="15分钟前"
                 type="export"
               />
-              <ActivityItem 
-                action="系统备份" 
-                user="系统" 
+              <ActivityItem
+                action="系统备份"
+                user="系统"
                 time="30分钟前"
                 type="system"
               />
             </div>
-            <button class="w-full mt-4 text-sm text-blue-600 hover:text-blue-700 py-2 hover:bg-blue-50 rounded-lg transition-colors">
+            <Button
+              variant="ghost"
+              class="w-full mt-4 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+              size="sm"
+            >
               查看所有活动
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -168,10 +174,10 @@ function AdminDashboard() {
   )
 }
 
-function StatCard({ title, value, change, changeType, icon, color }: { 
-  title: string, 
-  value: string, 
-  change: string, 
+function StatCard({ title, value, change, changeType, icon, color }: {
+  title: string,
+  value: string,
+  change: string,
   changeType: 'positive' | 'negative',
   icon: string,
   color: string

@@ -1,4 +1,4 @@
-import { notFound } from '@tanstack/solid-router'
+import { notFound } from '@tanstack/solid-start'
 import { createServerFn } from '@tanstack/solid-start'
 import axios from 'redaxios'
 

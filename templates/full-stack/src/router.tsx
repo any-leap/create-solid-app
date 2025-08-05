@@ -1,22 +1,2 @@
-import { createRouter as createTanStackRouter } from '@tanstack/solid-router'
-import { routeTree } from './routeTree.gen'
-import { DefaultCatchBoundary } from './components/DefaultCatchBoundary'
-import { NotFound } from './components/NotFound'
-
-export function createRouter() {
-  const router = createTanStackRouter({
-    routeTree,
-    defaultPreload: 'intent',
-    defaultErrorComponent: DefaultCatchBoundary,
-    defaultNotFoundComponent: () => <NotFound />,
-    scrollRestoration: true,
-  })
-
-  return router
-}
-
-declare module '@tanstack/solid-router' {
-  interface Register {
-    router: ReturnType<typeof createRouter>
-  }
-}
+// TanStack Start 自动处理路由器创建，无需手动配置
+// 路由配置在各个路由文件中通过 createFileRoute 定义

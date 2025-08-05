@@ -1,4 +1,4 @@
-import { Outlet, createFileRoute } from '@tanstack/solid-router'
+import { Outlet, createFileRoute } from '@tanstack/solid-start'
 
 export const Route = createFileRoute('/_pathlessLayout')({
   component: LayoutComponent,
