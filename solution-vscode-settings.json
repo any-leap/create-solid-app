@@ -1,0 +1,15 @@
+{
+  "typescript.suggest.includePackageJsonAutoImports": "auto",
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  
+  // 针对 TanStack Router 的特殊配置
+  "typescript.suggest.exclude": {
+    "@tanstack/solid-router": ["createFileRoute"]
+  },
+  
+  // 强制优先使用 @tanstack/solid-start
+  "typescript.preferences.includeCompletionsForModuleExports": true,
+  "typescript.suggest.completeFunctionCalls": true
+}

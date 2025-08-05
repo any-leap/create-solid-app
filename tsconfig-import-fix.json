@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // 其他配置...
+    "baseUrl": ".",
+    "paths": {
+      // 强制路由相关的导入使用 solid-start
+      "createFileRoute": ["node_modules/@tanstack/solid-start"],
+      "@tanstack/solid-router": ["node_modules/@tanstack/solid-start"]
+    },
+    "typeRoots": ["./node_modules/@types"],
+    
+    // 改善导入建议
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false
+  },
+  "ts-node": {
+    "esm": true
+  }
+}
