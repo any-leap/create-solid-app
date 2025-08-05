@@ -1,6 +1,6 @@
 {
   "name": "@any-l/create-solid-app",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "智能化的 TanStack Solid Start 项目脚手架",
   "type": "module",
   "bin": {
