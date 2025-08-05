@@ -1,0 +1,37 @@
+# 开发相关文件
+.git/
+.gitignore
+*.log
+npm-debug.log*
+.DS_Store
+
+# 测试和构建
+coverage/
+.nyc_output/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 模板依赖（这些不应该被发布）
+templates/*/node_modules/
+templates/*/bun.lock
+templates/*/.next/
+templates/*/dist/
+templates/*/build/
+templates/*/*.log
+
+# 临时文件
+*.tmp
+*.temp
+.cache/
+
+# 文档草稿
+DRAFT*.md
+TODO.md
+NOTES.md
