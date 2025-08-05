@@ -56,6 +56,9 @@ export class ProjectCreator {
         installSuccess = await this.packageManager.installDependencies(projectPath)
       }
 
+      // 修复潜在的 import 问题
+      await this.fixDuplicateImports(projectPath)
+
       // 初始化 Git 仓库（在依赖安装后，确保 lock 文件被包含）
       let gitSuccess = true
       if (git) {
@@ -114,6 +117,25 @@ export class ProjectCreator {
     await ReadmeGenerator.generate(projectPath, config)
     
     logger.succeedSpinner('配置文件生成完成')
+  }
+
+  /**
+   * 修复重复的 createFileRoute import 问题
+   */
+  async fixDuplicateImports(projectPath) {
+    try {
+      logger.startSpinner('🔧 修复潜在的 import 问题...')
+      const { fixDuplicateImports } = await import('../fix-imports.js')
+      const fixedCount = await fixDuplicateImports(projectPath)
+      if (fixedCount > 0) {
+        logger.succeedSpinner(`修复了 ${fixedCount} 个文件的 import 问题`)
+      } else {
+        logger.succeedSpinner('检查完成，无需修复')
+      }
+    } catch (error) {
+      logger.failSpinner('修复 import 问题时出错')
+      logger.warn('警告:', error.message)
+    }
   }
 
   /**
