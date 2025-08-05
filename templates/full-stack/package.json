@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && tsc --noEmit",
-    "start": "node .output/server/index.mjs",
-    "preview": "vite start",
+    "start": "vite start",
+    "preview": "vite preview",
     "smart-start": "bun scripts/smart-start.js",
     "kill-port": "lsof -ti:3000 | xargs kill -9 2>/dev/null || echo '端口 3000 已清理'",
     "reset": "bun run kill-port && bun run build && bun run start",
