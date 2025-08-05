@@ -1,11 +1,12 @@
 /// <reference types="vite/client" />
-import type { ReactNode } from 'react'
+import type { JSX } from 'solid-js'
 import {
   Outlet,
   createRootRoute,
   HeadContent,
   Scripts,
 } from '@tanstack/solid-router'
+import '../styles/app.css'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -18,7 +19,11 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'Solid Start App',
+        title: 'SolidApp - 构建现代化 Web 应用',
+      },
+      {
+        name: 'description',
+        content: '基于 TanStack Solid Start 的现代化开发平台，让您专注于创新而非配置。',
       },
     ],
   }),
@@ -33,7 +38,7 @@ function RootComponent() {
   )
 }
 
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+function RootDocument({ children }: { children: JSX.Element }) {
   return (
     <html>
       <head>

@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
-import type { ReactNode } from 'react'
+import type { JSX } from 'solid-js'
 import {
   Outlet,
   createRootRoute,
@@ -33,7 +33,7 @@ function RootComponent() {
   )
 }
 
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+function RootDocument({ children }: { children: JSX.Element }) {
   return (
     <html>
       <head>

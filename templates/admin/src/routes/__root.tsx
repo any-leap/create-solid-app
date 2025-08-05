@@ -1,121 +1,64 @@
 /// <reference types="vite/client" />
+import type { JSX } from 'solid-js'
 import {
-  HeadContent,
-  Link,
-  Scripts,
+  Outlet,
   createRootRoute,
+  HeadContent,
+  Scripts,
+  ErrorComponent,
 } from '@tanstack/solid-router'
-import { TanStackRouterDevtools } from '@tanstack/solid-router-devtools'
-import type * as Solid from 'solid-js'
-import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary'
-import { NotFound } from '~/components/NotFound'
-import appCss from '~/styles/app.css?url'
-import { seo } from '~/utils/seo'
+import { DefaultCatchBoundary } from '../components/DefaultCatchBoundary'
+import { NotFound } from '../components/NotFound'
+import '../styles/app.css'
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       {
-        charset: 'utf-8',
+        charSet: 'utf-8',
       },
       {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1',
       },
-      ...seo({
-        title:
-          'TanStack Solid Start | Type-Safe, Client-First, Full-Stack SolidJS Framework',
-        description: `TanStack Solid Start is a type-safe, client-first, full-stack SolidJS framework. `,
-      }),
-    ],
-    links: [
-      { rel: 'stylesheet', href: appCss },
       {
-        rel: 'apple-touch-icon',
-        sizes: '180x180',
-        href: '/apple-touch-icon.png',
+        title: 'TanStack Start',
       },
       {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '32x32',
-        href: '/favicon-32x32.png',
+        name: 'description',
+        content: `TanStack Start ${1}`,
       },
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '16x16',
-        href: '/favicon-16x16.png',
-      },
-      { rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
-      { rel: 'icon', href: '/favicon.ico' },
     ],
   }),
-  errorComponent: DefaultCatchBoundary,
+  errorComponent: (props) => {
+    return (
+      <RootDocument>
+        <DefaultCatchBoundary {...props} />
+      </RootDocument>
+    )
+  },
   notFoundComponent: () => <NotFound />,
-  shellComponent: RootDocument,
+  component: RootComponent,
 })
 
-function RootDocument({ children }: { children: Solid.JSX.Element }) {
+function RootComponent() {
   return (
-    <>
-      <HeadContent />
-      <div class="p-2 flex gap-2 text-lg">
-        <Link
-          to="/"
-          activeProps={{
-            class: 'font-bold',
-          }}
-          activeOptions={{ exact: true }}
-        >
-          Home
-        </Link>{' '}
-        <Link
-          to="/posts"
-          activeProps={{
-            class: 'font-bold',
-          }}
-        >
-          Posts
-        </Link>{' '}
-        <Link
-          to="/users"
-          activeProps={{
-            class: 'font-bold',
-          }}
-        >
-          Users
-        </Link>{' '}
-        <Link
-          to="/route-a"
-          activeProps={{
-            class: 'font-bold',
-          }}
-        >
-          Pathless Layout
-        </Link>{' '}
-        <Link
-          to="/deferred"
-          activeProps={{
-            class: 'font-bold',
-          }}
-        >
-          Deferred
-        </Link>{' '}
-        <Link
-          // @ts-expect-error
-          to="/this-route-does-not-exist"
-          activeProps={{
-            class: 'font-bold',
-          }}
-        >
-          This Route Does Not Exist
-        </Link>
-      </div>
-      <hr />
-      {children}
-      <TanStackRouterDevtools position="bottom-right" />
-      <Scripts />
-    </>
+    <RootDocument>
+      <Outlet />
+    </RootDocument>
+  )
+}
+
+function RootDocument({ children }: { children: JSX.Element }) {
+  return (
+    <html>
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        {children}
+        <Scripts />
+      </body>
+    </html>
   )
 }
