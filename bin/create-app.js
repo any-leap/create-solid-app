@@ -179,11 +179,11 @@ async function createProject(config) {
       }
     }
     
+    // Note: @auth/solid-start is not compatible with TanStack Solid Start
+    // Auth implementation can be added manually using TanStack Start's server functions
     if (features.includes('auth')) {
-      packageJson.dependencies = {
-        ...packageJson.dependencies,
-        '@auth/solid-start': '^0.18.0'
-      }
+      // Auth dependencies will be added when TanStack-compatible auth solutions are available
+      console.log('📝 Auth feature selected - implement using TanStack Start server functions')
     }
     
     if (features.includes('testing')) {
@@ -442,9 +442,10 @@ DATABASE_URL=postgresql://user:password@localhost:5432/myapp
 
   if (features.includes('auth')) {
     envContent += `
-# 认证配置
-AUTH_SECRET=your-auth-secret-here
-AUTH_TRUST_HOST=true
+# 认证配置 (需要手动实现)
+# 参考: https://tanstack.com/start/latest/docs/framework/react/authentication
+# JWT_SECRET=your-jwt-secret-here
+# SESSION_SECRET=your-session-secret-here
 `
   }
 
@@ -474,7 +475,7 @@ ${description}
 - **构建工具**: Vite
 - **包管理**: Bun
 
-${features.includes('database') ? '- **数据库**: Drizzle ORM\n' : ''}${features.includes('auth') ? '- **认证**: Auth.js\n' : ''}${features.includes('docker') ? '- **部署**: Docker\n' : ''}${features.includes('testing') ? '- **测试**: Vitest\n' : ''}
+${features.includes('database') ? '- **数据库**: Drizzle ORM\n' : ''}${features.includes('auth') ? '- **认证**: 手动实现 (TanStack Start 服务器函数)\n' : ''}${features.includes('docker') ? '- **部署**: Docker\n' : ''}${features.includes('testing') ? '- **测试**: Vitest\n' : ''}
 
 ## 📦 快速开始
 
