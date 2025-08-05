@@ -8,6 +8,9 @@ import { DockerGenerator } from '../generators/docker.js'
 import { GitHubActionsGenerator } from '../generators/github-actions.js'
 import { EnvGenerator } from '../generators/env.js'
 import { ReadmeGenerator } from '../generators/readme.js'
+import { MonitoringGenerator } from '../generators/monitoring.js'
+import { AnalyticsGenerator } from '../generators/analytics.js'
+import { AuthGenerator } from '../generators/auth.js'
 import { FEATURES } from '../config/features.js'
 
 /**
@@ -85,7 +88,10 @@ export class ProjectCreator {
   async generateFeatureFiles(projectPath, features) {
     const generators = [
       { feature: 'docker', generator: DockerGenerator, name: '🐳 配置 Docker...' },
-      { feature: 'ci', generator: GitHubActionsGenerator, name: '⚙️ 配置 CI/CD...' }
+      { feature: 'ci', generator: GitHubActionsGenerator, name: '⚙️ 配置 CI/CD...' },
+      { feature: 'auth', generator: AuthGenerator, name: '🔐 配置用户认证...' },
+      { feature: 'monitoring', generator: MonitoringGenerator, name: '📊 配置错误监控...' },
+      { feature: 'analytics', generator: AnalyticsGenerator, name: '📈 配置数据分析...' }
     ]
 
     for (const { feature, generator, name } of generators) {

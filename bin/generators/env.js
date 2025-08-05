@@ -51,8 +51,8 @@ SENTRY_DSN=your-sentry-dsn-here`
    */
   static generateAnalyticsEnv() {
     return `
-# 数据分析配置
-ANALYTICS_ID=your-analytics-id-here`
+# 数据分析配置 (Google Analytics)
+ANALYTICS_ID=G-XXXXXXXXXX`
   }
 
   /**

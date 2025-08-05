@@ -15,7 +15,8 @@ export const FEATURES = {
   auth: { 
     name: '用户认证', 
     recommended: true,
-    note: '使用 TanStack Start 服务器函数手动实现'
+    note: '完整的前端认证系统，包含登录注册组件',
+    files: ['src/lib/auth/', 'src/components/Auth.tsx']
   },
   docker: { 
     name: 'Docker 配置', 
@@ -38,12 +39,18 @@ export const FEATURES = {
   monitoring: { 
     name: '错误监控 (Sentry)', 
     recommended: false,
-    envVars: ['SENTRY_DSN']
+    envVars: ['SENTRY_DSN'],
+    dependencies: {
+      '@sentry/solid-js': '^7.100.0'
+    },
+    files: ['src/lib/monitoring/', 'src/components/SentryErrorBoundary.tsx']
   },
   analytics: { 
-    name: '数据分析', 
+    name: '数据分析 (Google Analytics)', 
     recommended: false,
-    envVars: ['ANALYTICS_ID']
+    envVars: ['ANALYTICS_ID'],
+    files: ['src/lib/analytics/', 'src/components/Analytics.tsx'],
+    note: '包含 Google Analytics 4 集成和性能监控'
   }
 }
 
