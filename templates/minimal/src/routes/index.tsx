@@ -27,8 +27,8 @@ function Home() {
             
             {/* Floating Dots */}
             <div class="absolute -top-2 -left-2 w-3 h-3 bg-blue-400 rounded-full animate-bounce"></div>
-            <div class="absolute -top-4 right-8 w-2 h-2 bg-purple-400 rounded-full animate-bounce" style="animation-delay: 0.5s"></div>
-            <div class="absolute -bottom-2 left-8 w-4 h-4 bg-indigo-400 rounded-full animate-bounce" style="animation-delay: 1s"></div>
+            <div class="absolute -top-4 right-8 w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{"animation-delay": "0.5s"}}></div>
+            <div class="absolute -bottom-2 left-8 w-4 h-4 bg-indigo-400 rounded-full animate-bounce" style={{"animation-delay": "1s"}}></div>
           </div>
 
           {/* Main Content */}
