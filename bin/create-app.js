@@ -572,11 +572,11 @@ MIT License
 program
   .name('create-solid-app')
   .description('智能化的 TanStack Solid Start 项目脚手架')
-  .version('1.2.5')
+  .version('1.3.0')
 
 program
   .argument('[project-name]', '项目名称')
-  .option('-t, --template <template>', '使用指定模板', 'full-stack')
+  .option('-t, --template <template>', '使用指定模板 (minimal|full-stack|admin|landing)')
   .option('--skip-git', '跳过 Git 初始化')
   .option('--skip-install', '跳过依赖安装')
   .action(async (projectName, options) => {
@@ -602,12 +602,22 @@ program
       }
     }
 
-    // 获取项目配置，传入命令行选项
-    const config = await getProjectConfig(projectName, options)
-    
-    // 应用命令行选项
-    if (options.skipGit) config.git = false
-    if (options.skipInstall) config.install = false
+      // 验证模板选择
+  if (options.template && !TEMPLATES[options.template]) {
+    console.error(chalk.red(`❌ 无效的模板: ${options.template}`))
+    console.log(chalk.blue('可用的模板:'))
+    Object.entries(TEMPLATES).forEach(([key, template]) => {
+      console.log(chalk.gray(`  • ${key} - ${template.name}`))
+    })
+    process.exit(1)
+  }
+
+  // 获取项目配置，传入命令行选项
+  const config = await getProjectConfig(projectName, options)
+  
+  // 应用命令行选项
+  if (options.skipGit) config.git = false
+  if (options.skipInstall) config.install = false
 
     // 创建项目
     await createProject(config)
