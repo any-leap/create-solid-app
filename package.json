@@ -1,0 +1,60 @@
+{
+  "name": "@any-l/create-solid-app",
+  "version": "1.0.0",
+  "description": "智能化的 TanStack Solid Start 项目脚手架",
+  "type": "module",
+  "bin": {
+    "create-solid-app": "./bin/create-app.js"
+  },
+  "files": [
+    "bin",
+    "templates",
+    "lib",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "publish:npm": "npm publish",
+    "publish:github": "npm publish --registry=https://npm.pkg.github.com"
+  },
+  "keywords": [
+    "solid",
+    "tanstack",
+    "scaffold",
+    "cli",
+    "template",
+    "typescript"
+  ],
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "enquirer": "^2.4.1",
+    "execa": "^9.5.1",
+    "fs-extra": "^11.2.0",
+    "ora": "^8.1.1",
+    "prompts": "^2.4.2",
+    "semver": "^7.6.3",
+    "validate-npm-package-name": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^22.5.4",
+    "@types/prompts": "^2.4.9",
+    "@types/semver": "^7.5.8",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/any-leap/create-solid-app.git"
+  },
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT"
+}
