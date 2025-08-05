@@ -1,10 +1,9 @@
 import { createFileRoute } from '@tanstack/solid-start'
+import { Button } from '~/components/ui/Button'
 
 export const Route = createFileRoute('/')({
   component: AdminDashboard,
 })
-
-import { Button } from '~/components/ui/Button'
 
 function AdminDashboard() {
   return (
