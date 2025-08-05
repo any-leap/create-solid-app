@@ -19,7 +19,7 @@ const program = new Command()
 const TEMPLATES = {
   'minimal': {
     name: '最小化应用',
-    description: '基础的 Solid Start 应用，适合快速原型'
+    description: '基础的 Solid Start 应用，适合快速原型开发'
   },
   'full-stack': {
     name: '全栈应用',
@@ -27,7 +27,7 @@ const TEMPLATES = {
   },
   'admin': {
     name: '管理后台',
-    description: '企业级管理后台，包含权限管理、数据图表'
+    description: '企业级管理后台，包含仪表板、数据管理功能'
   },
   'landing': {
     name: '着陆页',
