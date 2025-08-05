@@ -560,7 +560,7 @@ MIT License
 program
   .name('create-solid-app')
   .description('智能化的 TanStack Solid Start 项目脚手架')
-  .version('1.2.0')
+  .version('1.2.1')
 
 program
   .argument('[project-name]', '项目名称')
