@@ -25,8 +25,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['solid-js'],
-          router: ['@tanstack/solid-router'],
           ui: ['@kobalte/core'],
         },
       },
