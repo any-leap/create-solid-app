@@ -288,7 +288,7 @@ export const Route = createAPIFileRoute('/api/auth/logout')({
    */
   static generateMeApi() {
     return `import { json, createAPIFileRoute } from '@tanstack/solid-router'
-import { getCurrentUser } from '../../middleware/auth'
+import { getCurrentUser } from '../../../middleware/auth'
 
 export const Route = createAPIFileRoute('/api/auth/me')({
   GET: async ({ request }: { request: Request }) => {
