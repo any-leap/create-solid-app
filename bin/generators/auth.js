@@ -1,3 +1,10 @@
+import { join } from 'path'
+import fs from 'fs-extra'
+
+/**
+ * 认证系统生成器
+ */
+export class AuthGenerator {
   /**
    * 生成数据库 schema
    */
