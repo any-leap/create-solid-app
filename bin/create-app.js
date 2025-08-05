@@ -146,8 +146,14 @@ async function createProject(config) {
     // 处理 .gitignore 文件 (npm 会忽略 .gitignore，所以我们使用 _gitignore)
     const gitignoreSource = join(templatePath, '_gitignore')
     const gitignoreTarget = join(projectPath, '.gitignore')
+    const gitignoreTemp = join(projectPath, '_gitignore')
+    
     if (await fs.pathExists(gitignoreSource)) {
       await fs.copy(gitignoreSource, gitignoreTarget)
+      // 删除复制过来的临时 _gitignore 文件
+      if (await fs.pathExists(gitignoreTemp)) {
+        await fs.remove(gitignoreTemp)
+      }
     }
     
     spinner.succeed('模板文件复制完成')
