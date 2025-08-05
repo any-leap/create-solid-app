@@ -4,9 +4,9 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build && tsc --noEmit",
-    "start": "vite start",
+    "dev": "bun --bun vite dev",
+    "build": "bun --bun vite build && tsc --noEmit",
+    "start": "bun --bun vite start",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx",
