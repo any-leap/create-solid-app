@@ -4,11 +4,13 @@ import {
   rootRouteId,
   useMatch,
   useRouter,
+  useNavigate,
 } from '@tanstack/solid-start'
 import type { ErrorComponentProps } from '@tanstack/solid-start'
 
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   const router = useRouter()
+  const navigate = useNavigate()
   const isRoot = useMatch({
     strict: false,
     select: (state) => state.id === rootRouteId,
@@ -36,16 +38,19 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
             Home
           </Link>
         ) : (
-          <Link
-            to="/"
-            class={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
-            onClick={(e) => {
-              e.preventDefault()
-              window.history.back()
+          <button
+            onClick={() => {
+              // 尝试导航到父级路由，如果不可用则回到首页
+              try {
+                navigate({ to: '..' })
+              } catch {
+                navigate({ to: '/' })
+              }
             }}
+            class={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
           >
             Go Back
-          </Link>
+          </button>
         )}
       </div>
     </div>

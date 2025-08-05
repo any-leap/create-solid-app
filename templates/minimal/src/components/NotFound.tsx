@@ -1,6 +1,8 @@
-import { Link } from '@tanstack/solid-start'
+import { Link, useNavigate } from '@tanstack/solid-start'
 
 export function NotFound({ children }: { children?: any }) {
+  const navigate = useNavigate()
+
   return (
     <div class="space-y-2 p-2">
       <div class="text-gray-600 dark:text-gray-400">
@@ -8,7 +10,14 @@ export function NotFound({ children }: { children?: any }) {
       </div>
       <p class="flex items-center gap-2 flex-wrap">
         <button
-          onClick={() => window.history.back()}
+          onClick={() => {
+            // 尝试导航到父级路由，如果不可用则回到首页
+            try {
+              navigate({ to: '..' })
+            } catch {
+              navigate({ to: '/' })
+            }
+          }}
           class="bg-emerald-500 text-white px-2 py-1 rounded uppercase font-black text-sm"
         >
           Go back
