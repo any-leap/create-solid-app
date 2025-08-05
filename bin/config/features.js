@@ -18,7 +18,7 @@ export const FEATURES = {
     note: '安全的服务器端session认证，使用Bun SQLite存储用户数据',
     files: [
       'src/lib/auth/database.ts',
-      'src/lib/auth/auth-store.ts', 
+      'src/lib/auth/auth-store.tsx', 
       'src/components/Auth.tsx',
       'src/routes/api/auth/',
       'src/middleware/auth.ts',

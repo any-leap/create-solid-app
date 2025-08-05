@@ -683,7 +683,7 @@ export function UserMenu() {
     
     // 生成客户端认证存储
     await fs.writeFile(
-      join(authDir, 'auth-store.ts'), 
+      join(authDir, 'auth-store.tsx'), 
       this.generateAuthStore()
     )
     

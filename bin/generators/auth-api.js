@@ -128,10 +128,12 @@ export function getCurrentUser(request: Request) {
    */
   static generateLoginApi() {
     return `import { json } from '@tanstack/solid-router'
+import { createAPIFileRoute } from '@tanstack/solid-router'
 import { authDb } from '../../lib/auth/database'
 
-export async function POST({ request }: { request: Request }) {
-  try {
+export const Route = createAPIFileRoute('/api/auth/login')({
+  POST: async ({ request }: { request: Request }) => {
+    try {
     const { email, password } = await request.json()
     
     if (!email || !password) {
@@ -166,11 +168,12 @@ export async function POST({ request }: { request: Request }) {
     
     return response
     
-  } catch (error) {
-    console.error('Login error:', error)
-    return json({ error: '登录失败' }, { status: 500 })
+    } catch (error) {
+      console.error('Login error:', error)
+      return json({ error: '登录失败' }, { status: 500 })
+    }
   }
-}`
+})`
   }
 
   /**
@@ -178,9 +181,11 @@ export async function POST({ request }: { request: Request }) {
    */
   static generateRegisterApi() {
     return `import { json } from '@tanstack/solid-router'
+import { createAPIFileRoute } from '@tanstack/solid-router'
 import { authDb } from '../../lib/auth/database'
 
-export async function POST({ request }: { request: Request }) {
+export const Route = createAPIFileRoute('/api/auth/register')({
+  POST: async ({ request }: { request: Request }) => {
   try {
     const { email, password, name } = await request.json()
     
@@ -237,8 +242,9 @@ export async function POST({ request }: { request: Request }) {
   } catch (error) {
     console.error('Register error:', error)
     return json({ error: '注册失败' }, { status: 500 })
+    }
   }
-}`
+})`
   }
 
   /**
@@ -246,9 +252,11 @@ export async function POST({ request }: { request: Request }) {
    */
   static generateLogoutApi() {
     return `import { json } from '@tanstack/solid-router'
+import { createAPIFileRoute } from '@tanstack/solid-router'
 import { authDb } from '../../lib/auth/database'
 
-export async function POST({ request }: { request: Request }) {
+export const Route = createAPIFileRoute('/api/auth/logout')({
+  POST: async ({ request }: { request: Request }) => {
   try {
     // 从 cookie 获取 session ID
     const cookies = request.headers.get('cookie')
@@ -273,8 +281,9 @@ export async function POST({ request }: { request: Request }) {
   } catch (error) {
     console.error('Logout error:', error)
     return json({ error: '登出失败' }, { status: 500 })
+    }
   }
-}`
+})`
   }
 
   /**
@@ -282,9 +291,11 @@ export async function POST({ request }: { request: Request }) {
    */
   static generateMeApi() {
     return `import { json } from '@tanstack/solid-router'
+import { createAPIFileRoute } from '@tanstack/solid-router'
 import { getCurrentUser } from '../../middleware/auth'
 
-export async function GET({ request }: { request: Request }) {
+export const Route = createAPIFileRoute('/api/auth/me')({
+  GET: async ({ request }: { request: Request }) => {
   try {
     const user = getCurrentUser(request)
     
@@ -297,8 +308,9 @@ export async function GET({ request }: { request: Request }) {
   } catch (error) {
     console.error('Get user error:', error)
     return json({ error: '获取用户信息失败' }, { status: 500 })
+    }
   }
-}`
+})`
   }
 
   /**
