@@ -13,7 +13,27 @@ export default defineConfig({
     tsConfigPaths({
       projects: ['./tsconfig.json'],
     }),
-    tanstackStart({ customViteSolidPlugin: true }),
+    tanstackStart({ 
+      customViteSolidPlugin: true,
+      prerender: {
+        routes: ['/'],
+      },
+    }),
     viteSolid({ ssr: true }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['solid-js'],
+          router: ['@tanstack/solid-router'],
+          ui: ['@kobalte/core'],
+        },
+      },
+    },
+    sourcemap: true,
+  },
+  optimizeDeps: {
+    include: ['solid-js', '@tanstack/solid-router'],
+  },
 })

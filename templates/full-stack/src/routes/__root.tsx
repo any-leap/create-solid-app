@@ -24,8 +24,8 @@ export const Route = createRootRoute({
       },
       ...seo({
         title:
-          'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
-        description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
+          'TanStack Solid Start | Type-Safe, Client-First, Full-Stack SolidJS Framework',
+        description: `TanStack Solid Start is a type-safe, client-first, full-stack SolidJS framework. `,
       }),
     ],
     links: [

@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "@typescript-eslint/recommended",
+    "plugin:solid/typescript"
+  ],
+  "plugins": ["@typescript-eslint", "solid"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "rules": {
+    "prefer-const": "error",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "solid/reactivity": "error",
+    "solid/no-destructure": "error",
+    "solid/jsx-no-duplicate-props": "error"
+  },
+  "ignorePatterns": ["dist", "node_modules", ".output", ".nitro"]
+}

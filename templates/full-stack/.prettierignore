@@ -1,0 +1,9 @@
+node_modules
+dist
+.output
+.nitro
+.tanstack
+*.log
+bun.lockb
+package-lock.json
+yarn.lock

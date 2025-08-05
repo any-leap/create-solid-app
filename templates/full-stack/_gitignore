@@ -80,3 +80,4 @@ yarn-error.log*
 
 # Bun
 bun.lockb
+!bun.lock
