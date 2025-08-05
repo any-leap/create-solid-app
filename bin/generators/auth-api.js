@@ -317,6 +317,7 @@ export const Route = createAPIFileRoute('/api/auth/me')({
    * 生成所有 API 文件
    */
   static async generate(projectPath) {
+    console.log('生成认证 API...')
     // 创建 API 目录
     const apiDir = join(projectPath, 'src', 'routes', 'api', 'auth')
     await fs.ensureDir(apiDir)
