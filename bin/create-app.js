@@ -143,6 +143,13 @@ async function createProject(config) {
     const templatePath = join(__dirname, '..', 'templates', template)
     await fs.copy(templatePath, projectPath)
     
+    // 处理 .gitignore 文件 (npm 会忽略 .gitignore，所以我们使用 _gitignore)
+    const gitignoreSource = join(templatePath, '_gitignore')
+    const gitignoreTarget = join(projectPath, '.gitignore')
+    if (await fs.pathExists(gitignoreSource)) {
+      await fs.copy(gitignoreSource, gitignoreTarget)
+    }
+    
     spinner.succeed('模板文件复制完成')
 
     // 生成 package.json
