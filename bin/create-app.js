@@ -169,7 +169,7 @@ async function createProject(config) {
     if (features.includes('auth')) {
       packageJson.dependencies = {
         ...packageJson.dependencies,
-        '@auth/solid-start': '^0.4.2'
+        '@auth/solid-start': '^0.18.0'
       }
     }
     
@@ -177,7 +177,7 @@ async function createProject(config) {
       packageJson.devDependencies = {
         ...packageJson.devDependencies,
         'vitest': '^3.2.4',
-        '@solidjs/testing-library': '^0.8.9'
+        '@solidjs/testing-library': '^0.8.10'
       }
     }
     
