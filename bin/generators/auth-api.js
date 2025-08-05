@@ -66,7 +66,7 @@ export function requireAdmin(request: Request) {
    * 生成登录 API
    */
   static generateLoginApi() {
-    return `import { json, createFileRoute } from '@tanstack/solid-router'
+    return `import { json, createFileRoute } from '@tanstack/solid-start'
 import { authDb } from '../../../lib/auth/database'
 
 export const Route = createFileRoute('/api/auth/login')({
@@ -118,7 +118,7 @@ export const Route = createFileRoute('/api/auth/login')({
    * 生成注册 API
    */
   static generateRegisterApi() {
-    return `import { json, createFileRoute } from '@tanstack/solid-router'
+    return `import { json, createFileRoute } from '@tanstack/solid-start'
 import { authDb } from '../../../lib/auth/database'
 
 export const Route = createFileRoute('/api/auth/register')({
@@ -188,7 +188,7 @@ export const Route = createFileRoute('/api/auth/register')({
    * 生成登出 API
    */
   static generateLogoutApi() {
-    return `import { json, createFileRoute } from '@tanstack/solid-router'
+    return `import { json, createFileRoute } from '@tanstack/solid-start'
 import { authDb } from '../../../lib/auth/database'
 
 export const Route = createFileRoute('/api/auth/logout')({
@@ -226,7 +226,7 @@ export const Route = createFileRoute('/api/auth/logout')({
    * 生成获取当前用户 API
    */
   static generateMeApi() {
-    return `import { json, createFileRoute } from '@tanstack/solid-router'
+    return `import { json, createFileRoute } from '@tanstack/solid-start'
 import { getCurrentUser } from '../../../utils/auth'
 
 export const Route = createFileRoute('/api/auth/me')({
