@@ -215,20 +215,52 @@ async function createProject(config) {
 
     // 安装依赖
     if (install) {
-      spinner = ora('📦 安装依赖包...').start()
       process.chdir(projectPath)
       
-      // 优先使用 bun
+      // 检测并优先使用 Bun
+      let packageManager = 'npm'
+      let installCmd = ['install']
+      
       try {
-        await execa('bun', ['install'])
-        spinner.succeed('依赖安装完成 (使用 Bun)')
+        await execa('bun', ['--version'], { stdio: 'ignore' })
+        packageManager = 'bun'
+        installCmd = ['install']
       } catch (error) {
-        try {
-          await execa('npm', ['install'])
-          spinner.succeed('依赖安装完成 (使用 npm)')
-        } catch (error) {
-          spinner.fail('依赖安装失败')
-          console.error(chalk.red(error.message))
+        // Bun 不可用，使用 npm
+      }
+      
+      spinner = ora(`📦 正在安装依赖 (使用 ${packageManager})...`).start()
+      
+      try {
+        await execa(packageManager, installCmd, { 
+          stdio: ['inherit', 'pipe', 'pipe'],
+          timeout: 300000 // 5分钟超时
+        })
+        spinner.succeed(`✅ 依赖安装完成 (${packageManager})`)
+      } catch (error) {
+        spinner.fail(`❌ 依赖安装失败 (${packageManager})`)
+        console.error(chalk.red('\n错误详情:'))
+        console.error(chalk.red(error.message))
+        
+        // 如果 bun 失败了，尝试 npm 作为备选
+        if (packageManager === 'bun') {
+          console.log(chalk.yellow('\n正在尝试使用 npm 作为备选方案...'))
+          spinner = ora('📦 使用 npm 重新安装依赖...').start()
+          
+          try {
+            await execa('npm', ['install'], { 
+              stdio: ['inherit', 'pipe', 'pipe'],
+              timeout: 300000 
+            })
+            spinner.succeed('✅ 依赖安装完成 (npm 备选方案)')
+          } catch (npmError) {
+            spinner.fail('❌ npm 安装也失败了')
+            console.error(chalk.red('\nnpm 错误详情:'))
+            console.error(chalk.red(npmError.message))
+            console.log(chalk.yellow('\n建议手动运行: cd ' + projectName + ' && bun install'))
+          }
+        } else {
+          console.log(chalk.yellow('\n建议手动运行: cd ' + projectName + ' && bun install'))
         }
       }
     }
@@ -239,11 +271,14 @@ async function createProject(config) {
     console.log(chalk.white(`  cd ${projectName}`))
     
     if (!install) {
-      console.log(chalk.white('  bun install'))
+      console.log(chalk.white('  bun install  # 推荐使用 Bun (更快)'))
+      console.log(chalk.gray('  # 或者: npm install'))
     }
     
-    console.log(chalk.white('  bun run dev'))
-    console.log(chalk.gray('\n访问 http://localhost:3000 查看您的应用\n'))
+    console.log(chalk.white('  bun run dev  # 推荐使用 Bun'))
+    console.log(chalk.gray('  # 或者: npm run dev'))
+    console.log(chalk.gray('\n访问 http://localhost:3000 查看您的应用'))
+    console.log(chalk.cyan('💡 提示: 使用 Bun 可以获得更快的包管理和构建速度\n'))
 
     // 显示功能模块信息
     if (features.length > 0) {
