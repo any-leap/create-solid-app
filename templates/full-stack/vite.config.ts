@@ -21,8 +21,26 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          ui: ['@kobalte/core'],
+        manualChunks(id) {
+          // 只在客户端构建时进行手动分块
+          if (id.includes('node_modules')) {
+            // UI 组件库单独分块
+            if (id.includes('@kobalte/core')) {
+              return 'ui'
+            }
+            // 工具库分块
+            if (id.includes('lucide-solid') || id.includes('tailwind-merge')) {
+              return 'utils'
+            }
+            // 表单和验证库分块
+            if (id.includes('@modular-forms') || id.includes('valibot')) {
+              return 'forms'
+            }
+            // 其他第三方库
+            if (!id.includes('solid-js') && !id.includes('@tanstack')) {
+              return 'vendor'
+            }
+          }
         },
       },
     },
