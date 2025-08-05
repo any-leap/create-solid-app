@@ -128,7 +128,7 @@ export function getCurrentUser(request: Request) {
    */
   static generateLoginApi() {
     return `import { json, createAPIFileRoute } from '@tanstack/solid-router'
-import { authDb } from '../../lib/auth/database'
+import { authDb } from '../../../lib/auth/database'
 
 export const Route = createAPIFileRoute('/api/auth/login')({
   POST: async ({ request }: { request: Request }) => {
@@ -180,7 +180,7 @@ export const Route = createAPIFileRoute('/api/auth/login')({
    */
   static generateRegisterApi() {
     return `import { json, createAPIFileRoute } from '@tanstack/solid-router'
-import { authDb } from '../../lib/auth/database'
+import { authDb } from '../../../lib/auth/database'
 
 export const Route = createAPIFileRoute('/api/auth/register')({
   POST: async ({ request }: { request: Request }) => {
@@ -250,7 +250,7 @@ export const Route = createAPIFileRoute('/api/auth/register')({
    */
   static generateLogoutApi() {
     return `import { json, createAPIFileRoute } from '@tanstack/solid-router'
-import { authDb } from '../../lib/auth/database'
+import { authDb } from '../../../lib/auth/database'
 
 export const Route = createAPIFileRoute('/api/auth/logout')({
   POST: async ({ request }: { request: Request }) => {
