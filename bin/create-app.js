@@ -64,11 +64,15 @@ async function validateProjectName(name) {
   return true
 }
 
-async function getProjectConfig(projectName) {
+async function getProjectConfig(projectName, options = {}) {
   console.log(chalk.blue('\n🎯 让我们配置您的项目...\n'))
 
-  const response = await prompts([
-    {
+  // 构建提示问题数组，如果命令行已提供某些选项则跳过对应提示
+  const questions = []
+  
+  // 只有在命令行未指定模板时才询问模板选择
+  if (!options.template) {
+    questions.push({
       type: 'select',
       name: 'template',
       message: '选择项目模板:',
@@ -78,7 +82,10 @@ async function getProjectConfig(projectName) {
         value: key
       })),
       initial: 1 // 默认选择 full-stack
-    },
+    })
+  }
+  
+  questions.push(
     {
       type: 'multiselect',
       name: 'features',
@@ -114,15 +121,20 @@ async function getProjectConfig(projectName) {
       message: '立即安装依赖?',
       initial: true
     }
-  ])
+  )
 
-  if (!response.template) {
+  const response = await prompts(questions)
+
+  // 如果命令行提供了模板，使用命令行的值；否则检查用户是否取消了选择
+  const template = options.template || response.template
+  if (!template) {
     console.log(chalk.yellow('操作已取消'))
     process.exit(1)
   }
 
   return {
     projectName,
+    template,
     ...response
   }
 }
@@ -590,13 +602,12 @@ program
       }
     }
 
-    // 获取项目配置
-    const config = await getProjectConfig(projectName)
+    // 获取项目配置，传入命令行选项
+    const config = await getProjectConfig(projectName, options)
     
     // 应用命令行选项
     if (options.skipGit) config.git = false
     if (options.skipInstall) config.install = false
-    if (options.template) config.template = options.template
 
     // 创建项目
     await createProject(config)
