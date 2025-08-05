@@ -78,6 +78,5 @@ yarn-error.log*
 # TanStack Router cache
 .tanstack/
 
-# Bun
+# Bun (只忽略旧的二进制格式，新的文本格式应该被提交)
 bun.lockb
-!bun.lock

@@ -216,17 +216,7 @@ async function createProject(config) {
     await generateReadme(projectPath, config)
     spinner.succeed('配置文件生成完成')
 
-    // 初始化 Git
-    if (git) {
-      spinner = ora('📦 初始化 Git 仓库...').start()
-      process.chdir(projectPath)
-      await execa('git', ['init'])
-      await execa('git', ['add', '.'])
-      await execa('git', ['commit', '-m', 'feat: 初始化项目'])
-      spinner.succeed('Git 仓库初始化完成')
-    }
-
-    // 安装依赖
+    // 先安装依赖，生成 lock 文件
     if (install) {
       process.chdir(projectPath)
       
@@ -278,6 +268,17 @@ async function createProject(config) {
       }
     }
 
+    // 在安装依赖后初始化 Git，确保 lock 文件被包含在首次提交中
+    if (git) {
+      spinner = ora('📦 初始化 Git 仓库...').start()
+      if (!install) process.chdir(projectPath) // 如果没有安装依赖，需要切换到项目目录
+      
+      await execa('git', ['init'])
+      await execa('git', ['add', '.'])
+      await execa('git', ['commit', '-m', 'feat: 初始化项目'])
+      spinner.succeed('Git 仓库初始化完成')
+    }
+
     // 成功消息
     console.log(chalk.green('\n🎉 项目创建成功!\n'))
     console.log(chalk.cyan('下一步:'))
@@ -291,6 +292,11 @@ async function createProject(config) {
     console.log(chalk.white('  bun run dev  # 推荐使用 Bun'))
     console.log(chalk.gray('  # 或者: npm run dev'))
     console.log(chalk.gray('\n访问 http://localhost:3000 查看您的应用'))
+    
+    if (git && install) {
+      console.log(chalk.green('✅ Git 仓库已初始化，bun.lock 文件已包含在首次提交中'))
+    }
+    
     console.log(chalk.cyan('💡 提示: 使用 Bun 可以获得更快的包管理和构建速度\n'))
 
     // 显示功能模块信息
@@ -321,7 +327,7 @@ WORKDIR /app
 
 # 安装依赖
 FROM base AS deps
-COPY package.json bun.lockb ./
+COPY package.json bun.lock* ./
 RUN bun install --frozen-lockfile
 
 # 构建应用
