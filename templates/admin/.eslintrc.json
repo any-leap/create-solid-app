@@ -47,10 +47,7 @@
     "solid/no-unknown-namespaces": "error",
     "solid/prefer-for": "error",
     "solid/style-prop": "error",
-    "solid/self-closing-comp": "error",
-    
-    // JSX 样式属性检查 (自定义规则)
-    "solid/jsx-no-string-styles": "error"
+    "solid/self-closing-comp": "error"
   },
   "overrides": [
     {

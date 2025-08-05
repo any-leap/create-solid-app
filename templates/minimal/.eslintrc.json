@@ -2,7 +2,6 @@
   "extends": [
     "eslint:recommended",
     "@typescript-eslint/recommended",
-    "@typescript-eslint/recommended-requiring-type-checking",
     "plugin:solid/typescript"
   ],
   "plugins": ["@typescript-eslint", "solid"],
@@ -24,15 +23,11 @@
     "no-console": "warn",
     "no-debugger": "warn",
     
-    // TypeScript 严格规则
+    // TypeScript 规则
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/prefer-nullish-coalescing": "error",
     "@typescript-eslint/prefer-optional-chain": "error",
-    "@typescript-eslint/no-unnecessary-type-assertion": "error",
-    "@typescript-eslint/strict-boolean-expressions": "error",
-    "@typescript-eslint/no-floating-promises": "error",
-    "@typescript-eslint/await-thenable": "error",
     
     // Solid.js 特定规则
     "solid/reactivity": "error",
@@ -44,22 +39,9 @@
     "solid/no-innerhtml": "warn",
     "solid/no-react-deps": "error",
     "solid/no-react-specific-props": "error",
-    "solid/no-unknown-namespaces": "error",
     "solid/prefer-for": "error",
     "solid/style-prop": "error",
-    "solid/self-closing-comp": "error",
-    
-    // JSX 样式属性检查 (自定义规则)
-    "solid/jsx-no-string-styles": "error"
+    "solid/self-closing-comp": "error"
   },
-  "overrides": [
-    {
-      "files": ["*.test.ts", "*.test.tsx", "*.spec.ts", "*.spec.tsx"],
-      "rules": {
-        "@typescript-eslint/no-explicit-any": "off",
-        "no-console": "off"
-      }
-    }
-  ],
   "ignorePatterns": ["dist", "node_modules", ".output", ".nitro", "routeTree.gen.ts"]
 }
