@@ -15,9 +15,6 @@ export default defineConfig({
     }),
     tanstackStart({ 
       customViteSolidPlugin: true,
-      prerender: {
-        routes: ['/'],
-      },
     }),
     viteSolid({ ssr: true }),
   ],
