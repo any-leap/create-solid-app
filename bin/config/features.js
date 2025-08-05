@@ -13,10 +13,17 @@ export const FEATURES = {
     }
   },
   auth: { 
-    name: '用户认证', 
+    name: '用户认证 (Session + SQLite)', 
     recommended: true,
-    note: '完整的前端认证系统，包含登录注册组件',
-    files: ['src/lib/auth/', 'src/components/Auth.tsx']
+    note: '安全的服务器端session认证，使用Bun SQLite存储用户数据',
+    files: [
+      'src/lib/auth/database.ts',
+      'src/lib/auth/auth-store.ts', 
+      'src/components/Auth.tsx',
+      'src/routes/api/auth/',
+      'src/middleware/auth.ts',
+      'data/auth.sqlite'
+    ]
   },
   docker: { 
     name: 'Docker 配置', 

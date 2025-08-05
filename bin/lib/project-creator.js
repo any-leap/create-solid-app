@@ -11,6 +11,7 @@ import { ReadmeGenerator } from '../generators/readme.js'
 import { MonitoringGenerator } from '../generators/monitoring.js'
 import { AnalyticsGenerator } from '../generators/analytics.js'
 import { AuthGenerator } from '../generators/auth.js'
+import { AuthApiGenerator } from '../generators/auth-api.js'
 import { FEATURES } from '../config/features.js'
 
 /**
