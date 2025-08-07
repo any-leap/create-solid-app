@@ -6,6 +6,7 @@ import { PackageManager } from './package-manager.js'
 import { GitManager } from './git-manager.js'
 import { DockerGenerator } from '../generators/docker.js'
 import { GitHubActionsGenerator } from '../generators/github-actions.js'
+import { DatabaseGenerator } from '../generators/database.js'
 import { EnvGenerator } from '../generators/env.js'
 import { ReadmeGenerator } from '../generators/readme.js'
 import { MonitoringGenerator } from '../generators/monitoring.js'
@@ -91,6 +92,7 @@ export class ProjectCreator {
    */
   async generateFeatureFiles(projectPath, features) {
     const generators = [
+      { feature: 'database', generator: DatabaseGenerator, name: '🗄️ 配置数据库...' },
       { feature: 'docker', generator: DockerGenerator, name: '🐳 配置 Docker...' },
       { feature: 'ci', generator: GitHubActionsGenerator, name: '⚙️ 配置 CI/CD...' },
       { feature: 'auth', generator: AuthGenerator, name: '🔐 配置用户认证...' },

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from '@tanstack/solid-start'
+import { Link, useNavigate } from '@tanstack/solid-router'
 import { Button } from '~/components/ui/Button'
 
 export function NotFound({ children }: { children?: any }) {

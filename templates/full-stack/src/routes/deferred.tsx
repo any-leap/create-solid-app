@@ -1,4 +1,5 @@
-import { Await, createFileRoute } from '@tanstack/solid-start'
+import { createFileRoute } from '@tanstack/solid-router'
+import { Await } from '@tanstack/solid-start'
 import { createServerFn } from '@tanstack/solid-start'
 import { Suspense, createSignal } from 'solid-js'
 

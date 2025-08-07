@@ -1,4 +1,4 @@
-import { Link, useNavigate } from '@tanstack/solid-start'
+import { Link, useNavigate } from '@tanstack/solid-router'
 
 export function NotFound({ children }: { children?: any }) {
   const navigate = useNavigate()

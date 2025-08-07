@@ -1,11 +1,5 @@
-import {
-  ErrorComponent,
-  Link,
-  rootRouteId,
-  useMatch,
-  useRouter,
-  useNavigate,
-} from '@tanstack/solid-start'
+import { Link, useMatch, useRouter, useNavigate } from '@tanstack/solid-router'
+import { ErrorComponent, rootRouteId,  } from '@tanstack/solid-start'
 import type { ErrorComponentProps } from '@tanstack/solid-start'
 import { Button } from '~/components/ui/Button'
 import { Show, createSignal, onMount } from 'solid-js'

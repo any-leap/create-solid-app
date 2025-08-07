@@ -3,14 +3,28 @@
  */
 export const FEATURES = {
   database: { 
-    name: '数据库 (Drizzle ORM)', 
+    name: '数据库 (Drizzle ORM + SQLite)', 
     recommended: true,
     dependencies: {
-      'drizzle-orm': '^0.44.4'
+      'drizzle-orm': '^0.44.4',
+      'better-sqlite3': '^9.4.3'
     },
     devDependencies: {
-      'drizzle-kit': '^0.31.4'
-    }
+      'drizzle-kit': '^0.31.4',
+      '@types/better-sqlite3': '^7.6.9'
+    },
+    scripts: {
+      'db:generate': 'drizzle-kit generate',
+      'db:migrate': 'drizzle-kit migrate',
+      'db:studio': 'drizzle-kit studio',
+      'db:reset': 'rm -f data/app.db && bun run db:migrate'
+    },
+    files: [
+      'drizzle.config.ts',
+      'src/lib/db/',
+      'data/',
+      'drizzle/'
+    ]
   },
   auth: { 
     name: '用户认证 (Session + SQLite)', 
@@ -85,6 +99,7 @@ export function getFeature(featureKey) {
 export function getFeatureDependencies(selectedFeatures) {
   const dependencies = {}
   const devDependencies = {}
+  const scripts = {}
   
   selectedFeatures.forEach(featureKey => {
     const feature = FEATURES[featureKey]
@@ -94,7 +109,10 @@ export function getFeatureDependencies(selectedFeatures) {
     if (feature.devDependencies) {
       Object.assign(devDependencies, feature.devDependencies)
     }
+    if (feature.scripts) {
+      Object.assign(scripts, feature.scripts)
+    }
   })
   
-  return { dependencies, devDependencies }
+  return { dependencies, devDependencies, scripts }
 }

@@ -1,5 +1,6 @@
 // app.tsx - TanStack Start 入口点
-import { createApp, useRouter } from '@tanstack/solid-start'
+import { useRouter } from '@tanstack/solid-router'
+import { createApp } from '@tanstack/solid-start'
 import { routeTree } from './routeTree.gen'
 
 // 错误组件 - 需要单独定义以便使用 hooks

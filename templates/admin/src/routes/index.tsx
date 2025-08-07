@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/solid-start'
+import { createFileRoute } from '@tanstack/solid-router'
 import { Button } from '~/components/ui/Button'
 
 export const Route = createFileRoute('/')({

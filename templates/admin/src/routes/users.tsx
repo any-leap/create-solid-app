@@ -1,4 +1,4 @@
-import { Link, Outlet, createFileRoute } from '@tanstack/solid-start'
+import { Link, Outlet, createFileRoute } from '@tanstack/solid-router'
 import type { User } from '../utils/users'
 
 export const Route = createFileRoute('/users')({

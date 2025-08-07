@@ -1,11 +1,7 @@
 /// <reference types="vite/client" />
 import type { JSX } from 'solid-js'
-import {
-  Outlet,
-  createRootRoute,
-  HeadContent,
-  Scripts,
-} from '@tanstack/solid-start'
+import { Outlet, createRootRoute, HeadContent, Scripts } from '@tanstack/solid-router'
+import {  } from '@tanstack/solid-start'
 import '../styles/app.css'
 
 export const Route = createRootRoute({

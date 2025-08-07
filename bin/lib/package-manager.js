@@ -90,7 +90,7 @@ export class PackageManager {
   static async updatePackageJsonDependencies(packageJson, features) {
     // 根据选择的功能添加依赖
     const { getFeatureDependencies } = await import('../config/features.js')
-    const { dependencies, devDependencies } = getFeatureDependencies(features)
+    const { dependencies, devDependencies, scripts } = getFeatureDependencies(features)
 
     if (Object.keys(dependencies).length > 0) {
       packageJson.dependencies = {
@@ -103,6 +103,13 @@ export class PackageManager {
       packageJson.devDependencies = {
         ...packageJson.devDependencies,
         ...devDependencies
+      }
+    }
+
+    if (Object.keys(scripts).length > 0) {
+      packageJson.scripts = {
+        ...packageJson.scripts,
+        ...scripts
       }
     }
 
