@@ -1,7 +1,7 @@
 import { Link, useMatch, useRouter, useNavigate } from '@tanstack/solid-router'
 import { ErrorComponent, rootRouteId,  } from '@tanstack/solid-start'
 import type { ErrorComponentProps } from '@tanstack/solid-start'
-import { Button } from '~/components/ui/Button'
+import { Button } from '@kobalte/core/button'
 import { Show, createSignal, onMount } from 'solid-js'
 import { isServer } from 'solid-js/web'
 
@@ -61,9 +61,7 @@ function ClientErrorActions() {
         onClick={() => {
           router.invalidate()
         }}
-        variant="secondary"
-        size="sm"
-        class="uppercase font-extrabold"
+        class="px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold"
       >
         Try Again
       </Button>
@@ -84,9 +82,7 @@ function ClientErrorActions() {
               navigate({ to: '/' })
             }
           }}
-          variant="secondary"
-          size="sm"
-          class="uppercase font-extrabold"
+          class="px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold"
         >
           Go Back
         </Button>

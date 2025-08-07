@@ -1,5 +1,5 @@
 import { Link, useNavigate } from '@tanstack/solid-router'
-import { Button } from '~/components/ui/Button'
+import { Button } from '@kobalte/core/button'
 
 export function NotFound({ children }: { children?: any }) {
   const navigate = useNavigate()
@@ -19,8 +19,7 @@ export function NotFound({ children }: { children?: any }) {
               navigate({ to: '/' })
             }
           }}
-          class="bg-emerald-500 hover:bg-emerald-600 uppercase font-black"
-          size="sm"
+          class="bg-emerald-500 hover:bg-emerald-600 uppercase font-black text-white px-2 py-1 rounded text-sm"
         >
           Go back
         </Button>

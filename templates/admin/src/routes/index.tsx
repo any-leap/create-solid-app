@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/solid-router'
-import { Button } from '~/components/ui/Button'
+import { Button } from '@kobalte/core/button'
 
 export const Route = createFileRoute('/')({
   component: AdminDashboard,
@@ -110,7 +110,7 @@ function AdminDashboard() {
             <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
               <div class="flex items-center justify-between mb-6">
                 <h3 class="text-lg font-semibold text-gray-900">⚡ Quick Actions</h3>
-                <Button variant="ghost" size="sm" class="text-blue-600 hover:text-blue-700 p-0 h-auto">View All</Button>
+                <Button class="text-blue-600 hover:text-blue-700 p-0 h-auto bg-transparent hover:bg-blue-50">View All</Button>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <ActionCard icon="👥" title="User Management" description="Manage user accounts and permissions" />
@@ -154,9 +154,7 @@ function AdminDashboard() {
               />
             </div>
             <Button
-              variant="ghost"
-              class="w-full mt-4 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-              size="sm"
+              class="w-full mt-4 text-blue-600 hover:text-blue-700 hover:bg-blue-50 bg-transparent px-4 py-2 rounded-lg"
             >
               View All Activities
             </Button>
