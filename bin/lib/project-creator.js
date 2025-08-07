@@ -57,8 +57,8 @@ export class ProjectCreator {
         installSuccess = await this.packageManager.installDependencies(projectPath)
       }
 
-      // 修复潜在的 import 问题 (暂时禁用用于调试)
-      // await this.fixDuplicateImports(projectPath)
+      // 修复潜在的 import 问题
+      await this.fixDuplicateImports(projectPath)
 
       // 初始化 Git 仓库（在依赖安装后，确保 lock 文件被包含）
       let gitSuccess = true

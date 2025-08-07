@@ -5,6 +5,7 @@ import {
   HeadContent,
   Scripts,
 } from '@tanstack/solid-router'
+import '../styles/app.css'
 
 export const Route = createRootRoute({
   head: () => ({
