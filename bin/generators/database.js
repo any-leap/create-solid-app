@@ -351,4 +351,4 @@ export async function deletePost(id: number) {
 
     await fs.writeFile(postQueriesPath, postQueriesContent)
   }
-}`
+}
