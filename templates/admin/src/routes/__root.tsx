@@ -32,7 +32,11 @@ export const Route = createRootRoute({
       </RootDocument>
     )
   },
-  notFoundComponent: () => <NotFound />,
+  notFoundComponent: () => (
+    <RootDocument>
+      <NotFound />
+    </RootDocument>
+  ),
   component: RootComponent,
 })
 
