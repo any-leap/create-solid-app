@@ -47,16 +47,16 @@ async function fixDuplicateImports(projectPath) {
       let content = await fs.readFile(filePath, 'utf-8')
       const originalContent = content
       
-      // 检查是否有重复的 createFileRoute import
-      const hasWrongImport = content.includes("import { createFileRoute } from '@tanstack/solid-router'")
-      const hasCorrectImport = content.includes("from '@tanstack/solid-start'")
+      // 检查是否有重复的 createFileRoute import（同一个导入来自两个不同的包）
+      const solidRouterImportMatch = content.match(/import\s*\{([^}]*createFileRoute[^}]*)\}\s*from\s*'@tanstack\/solid-router'/);
+      const solidStartImportMatch = content.match(/import\s*\{([^}]*createFileRoute[^}]*)\}\s*from\s*'@tanstack\/solid-start'/);
       
-      if (hasWrongImport && hasCorrectImport) {
+      if (solidRouterImportMatch && solidStartImportMatch) {
         console.log(`  ❌ 发现重复 import: ${filePath.replace(projectPath, '.')}`)
         
-        // 移除错误的 solid-router import 行
+        // 移除来自 solid-start 的 createFileRoute import
         content = content.replace(
-          /import \{ createFileRoute \} from '@tanstack\/solid-router'\n?/g,
+          /import\s*\{[^}]*createFileRoute[^}]*\}\s*from\s*'@tanstack\/solid-start'\n?/g,
           ''
         )
         
