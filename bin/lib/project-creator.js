@@ -31,7 +31,7 @@ export class ProjectCreator {
   async createProject(config) {
     const { projectName, template, features, git, install } = config
     
-    logger.success(`\n🚀 正在创建项目 "${projectName}"...\n`)
+    logger.success(`\n🚀 Creating project "${projectName}"...\n`)
 
     const projectPath = join(process.cwd(), projectName)
     
@@ -57,7 +57,7 @@ export class ProjectCreator {
         installSuccess = await this.packageManager.installDependencies(projectPath)
       }
 
-      // 修复潜在的 import 问题
+      // Fix potential import issues
       await this.fixDuplicateImports(projectPath)
 
       // 初始化 Git 仓库（在依赖安装后，确保 lock 文件被包含）
@@ -88,55 +88,55 @@ export class ProjectCreator {
   }
 
   /**
-   * 生成功能模块文件
+   * Generate feature module files
    */
   async generateFeatureFiles(projectPath, features) {
     const generators = [
-      { feature: 'database', generator: DatabaseGenerator, name: '🗄️ 配置数据库...' },
-      { feature: 'docker', generator: DockerGenerator, name: '🐳 配置 Docker...' },
-      { feature: 'ci', generator: GitHubActionsGenerator, name: '⚙️ 配置 CI/CD...' },
-      { feature: 'auth', generator: AuthGenerator, name: '🔐 配置用户认证...' },
-      { feature: 'monitoring', generator: MonitoringGenerator, name: '📊 配置错误监控...' },
-      { feature: 'analytics', generator: AnalyticsGenerator, name: '📈 配置数据分析...' }
+      { feature: 'database', generator: DatabaseGenerator, name: '🗄️ Configuring database...' },
+      { feature: 'docker', generator: DockerGenerator, name: '🐳 Configuring Docker...' },
+      { feature: 'ci', generator: GitHubActionsGenerator, name: '⚙️ Configuring CI/CD...' },
+      { feature: 'auth', generator: AuthGenerator, name: '🔐 Configuring user authentication...' },
+      { feature: 'monitoring', generator: MonitoringGenerator, name: '📊 Configuring error monitoring...' },
+      { feature: 'analytics', generator: AnalyticsGenerator, name: '📈 Configuring analytics...' }
     ]
 
     for (const { feature, generator, name } of generators) {
       if (features.includes(feature)) {
         logger.startSpinner(name)
         await generator.generate(projectPath)
-        logger.succeedSpinner(`${name.replace('...', '完成')}`)
+        logger.succeedSpinner(`${name.replace('...', 'complete')}`)
       }
     }
   }
 
   /**
-   * 生成配置文件
+   * Generate configuration files
    */
   async generateConfigFiles(projectPath, config) {
-    logger.startSpinner('🔧 生成配置文件...')
+    logger.startSpinner('🔧 Generating configuration files...')
     
     await EnvGenerator.generate(projectPath, config.features)
     await ReadmeGenerator.generate(projectPath, config)
     
-    logger.succeedSpinner('配置文件生成完成')
+    logger.succeedSpinner('Configuration files generated successfully')
   }
 
   /**
-   * 修复重复的 createFileRoute import 问题
+   * Fix duplicate createFileRoute import issues
    */
   async fixDuplicateImports(projectPath) {
     try {
-      logger.startSpinner('🔧 修复潜在的 import 问题...')
+      logger.startSpinner('🔧 Fixing potential import issues...')
       const { fixDuplicateImports } = await import('../fix-imports.js')
       const fixedCount = await fixDuplicateImports(projectPath)
       if (fixedCount > 0) {
-        logger.succeedSpinner(`修复了 ${fixedCount} 个文件的 import 问题`)
+        logger.succeedSpinner(`Fixed import issues in ${fixedCount} files`)
       } else {
-        logger.succeedSpinner('检查完成，无需修复')
+        logger.succeedSpinner('Check completed, no fixes needed')
       }
     } catch (error) {
-      logger.failSpinner('修复 import 问题时出错')
-      logger.warn('警告:', error.message)
+      logger.failSpinner('Error occurred while fixing import issues')
+      logger.warn('Warning:', error.message)
     }
   }
 

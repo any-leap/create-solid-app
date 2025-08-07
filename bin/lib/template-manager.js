@@ -86,9 +86,9 @@ export class TemplateManager {
       
       await fs.writeJson(packageJsonPath, updatedPackageJson, { spaces: 2 })
       
-      logger.succeedSpinner('package.json 配置完成')
+      logger.succeedSpinner('package.json configured successfully')
     } catch (error) {
-      logger.failSpinner('package.json 配置失败')
+      logger.failSpinner('package.json configuration failed')
       throw error
     }
   }

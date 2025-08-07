@@ -80,31 +80,31 @@ export class Logger {
   }
 
   /**
-   * 显示项目创建成功信息
+   * Show project creation success message
    */
   showSuccessMessage(projectName, features, hasGit, hasInstall) {
-    this.success('\n🎉 项目创建成功!\n')
-    this.command('下一步:')
+    this.success('\n🎉 Project created successfully!\n')
+    this.command('Next steps:')
     console.log(chalk.white(`  cd ${projectName}`))
     
     if (!hasInstall) {
-      console.log(chalk.white('  bun install  # 推荐使用 Bun (更快)'))
-      this.hint('  # 或者: npm install')
+      console.log(chalk.white('  bun install  # Recommended: faster package manager'))
+      this.hint('  # Or: npm install')
     }
     
-    console.log(chalk.white('  bun run dev  # 推荐使用 Bun'))
-    this.hint('  # 或者: npm run dev')
-    this.hint('\n访问 http://localhost:3000 查看您的应用')
+    console.log(chalk.white('  bun run dev  # Recommended: faster runtime'))
+    this.hint('  # Or: npm run dev')
+    this.hint('\nVisit http://localhost:3000 to view your application')
     
     if (hasGit && hasInstall) {
-      this.success('✅ Git 仓库已初始化，bun.lock 文件已包含在首次提交中')
+      this.success('✅ Git repository initialized, bun.lock file included in initial commit')
     }
     
-    this.command('💡 提示: 使用 Bun 可以获得更快的包管理和构建速度\n')
+    this.command('💡 Tip: Use Bun for faster package management and build speeds\n')
 
-    // 显示功能模块信息
+    // Show enabled features
     if (features.length > 0) {
-      this.info('📋 已启用的功能模块:')
+      this.info('📋 Enabled features:')
       features.forEach(feature => {
         this.success(`  ✅ ${feature}`)
       })
@@ -113,10 +113,10 @@ export class Logger {
   }
 
   /**
-   * 显示错误详情
+   * Show error details
    */
   showError(error, context = '') {
-    this.error(`❌ ${context}失败`)
+    this.error(`❌ ${context} failed`)
     if (error.message) {
       this.error(`错误详情: ${error.message}`)
     }

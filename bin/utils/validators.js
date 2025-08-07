@@ -4,24 +4,24 @@ import { isValidTemplate } from '../config/templates.js'
 import { logger } from './logger.js'
 
 /**
- * 项目验证器类
+ * Project validator class
  */
 export class ProjectValidator {
   /**
-   * 验证项目名称
+   * Validate project name
    */
   static async validateProjectName(name) {
     const validation = validateNpmName(name)
     
     if (!validation.validForNewPackages) {
-      logger.error('❌ 项目名称无效:')
+      logger.error('❌ Invalid project name:')
       validation.errors?.forEach(error => logger.error(`  • ${error}`))
       validation.warnings?.forEach(warning => logger.warn(`  • ${warning}`))
       return false
     }
     
     if (fs.existsSync(name)) {
-      logger.error(`❌ 目录 "${name}" 已存在`)
+      logger.error(`❌ Directory "${name}" already exists`)
       return false
     }
     
@@ -29,16 +29,16 @@ export class ProjectValidator {
   }
 
   /**
-   * 验证模板选择
+   * Validate template selection
    */
   static async validateTemplate(template) {
     if (!template) {
-      return true // 允许为空，将通过交互式选择
+      return true // Allow empty, will be selected interactively
     }
 
     if (!isValidTemplate(template)) {
-      logger.error(`❌ 无效的模板: ${template}`)
-      logger.info('可用的模板:')
+      logger.error(`❌ Invalid template: ${template}`)
+      logger.info('Available templates:')
       const { TEMPLATES } = await import('../config/templates.js')
       Object.entries(TEMPLATES).forEach(([key, template]) => {
         logger.hint(`  • ${key} - ${template.name}`)
@@ -50,18 +50,18 @@ export class ProjectValidator {
   }
 
   /**
-   * 验证项目配置
+   * Validate project configuration
    */
   static validateConfig(config) {
     const { projectName, template } = config
     
     if (!projectName) {
-      logger.error('❌ 项目名称不能为空')
+      logger.error('❌ Project name cannot be empty')
       return false
     }
     
     if (!template) {
-      logger.error('❌ 必须选择一个模板')
+      logger.error('❌ Must select a template')
       return false
     }
     
@@ -69,7 +69,7 @@ export class ProjectValidator {
   }
 }
 
-// 导出便捷函数
+// Export convenience functions
 export const validateProjectName = ProjectValidator.validateProjectName
 export const validateTemplate = ProjectValidator.validateTemplate
 export const validateConfig = ProjectValidator.validateConfig

@@ -26,10 +26,10 @@ async function findRouteFiles(dir) {
 }
 
 /**
- * 修复重复的 createFileRoute import 问题
+ * Fix duplicate createFileRoute import issues
  */
 async function fixDuplicateImports(projectPath) {
-  console.log(`🔧 修复项目中的重复 import: ${projectPath}`)
+  console.log(`🔧 Fixing duplicate imports in project: ${projectPath}`)
   
   // 查找所有路由文件
   const routesDir = join(projectPath, 'src/routes')
@@ -74,11 +74,11 @@ async function fixDuplicateImports(projectPath) {
     }
   }
   
-  console.log(`\n🎉 修复完成！共修复了 ${fixedCount} 个文件`)
+  console.log(`\n🎉 Fix completed! Fixed ${fixedCount} files`)
   return fixedCount
 }
 
-// 如果直接运行脚本
+// If running script directly
 if (import.meta.url === `file://${process.argv[1]}`) {
   const projectPath = process.argv[2] || process.cwd()
   fixDuplicateImports(projectPath).catch(console.error)
