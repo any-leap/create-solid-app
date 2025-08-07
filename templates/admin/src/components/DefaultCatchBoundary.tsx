@@ -1,5 +1,5 @@
 import { Link, useMatch, useRouter, useNavigate } from '@tanstack/solid-router'
-import { ErrorComponent, rootRouteId,  } from '@tanstack/solid-start'
+import { ErrorComponent, rootRouteId, } from '@tanstack/solid-start'
 import type { ErrorComponentProps } from '@tanstack/solid-start'
 import { Button } from '@kobalte/core/button'
 import { Show, createSignal, onMount } from 'solid-js'
@@ -17,9 +17,9 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   return (
     <div class="min-w-0 flex-1 p-4 flex flex-col items-center justify-center gap-6">
       <ErrorComponent error={error} />
-      
-      <Show 
-        when={!isServer && isClient()} 
+
+      <Show
+        when={!isServer && isClient()}
         fallback={
           <div class="flex gap-2 items-center flex-wrap">
             <a
