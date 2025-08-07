@@ -1,24 +1,23 @@
-/// <reference types="vite/client" />
-import type { JSX } from 'solid-js'
+// src/routes/__root.tsx
 import {
   Outlet,
   createRootRoute,
   HeadContent,
   Scripts,
-} from '@tanstack/solid-start'
+} from '@tanstack/solid-router'
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       {
-        charSet: 'utf-8',
+        charset: 'utf-8',
       },
       {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'Solid Start App',
+        title: 'TanStack Start Starter',
       },
     ],
   }),
@@ -26,23 +25,5 @@ export const Route = createRootRoute({
 })
 
 function RootComponent() {
-  return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
-  )
-}
-
-function RootDocument({ children }: { children: JSX.Element }) {
-  return (
-    <html>
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  )
+  return <Outlet />
 }
