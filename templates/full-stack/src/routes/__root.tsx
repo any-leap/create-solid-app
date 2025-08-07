@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 import type { JSX } from 'solid-js'
 import { Outlet, createRootRoute, HeadContent, Scripts } from '@tanstack/solid-router'
-import { ErrorComponent,  } from '@tanstack/solid-start'
+import { ErrorComponent, } from '@tanstack/solid-start'
 import { DefaultCatchBoundary } from '../components/DefaultCatchBoundary'
 import { NotFound } from '../components/NotFound'
 import '../styles/app.css'
