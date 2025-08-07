@@ -2,20 +2,20 @@ import { join } from 'path'
 import fs from 'fs-extra'
 
 /**
- * 认证 API 生成器
+ * Authentication API generator
  */
 export class AuthApiGenerator {
   /**
-   * 生成认证工具函数
+   * Generate authentication utility functions
    */
   static generateAuthUtils() {
     return `import { authDb } from '../lib/auth/database'
 
 /**
- * 获取当前用户的工具函数
+ * Utility function to get current user
  */
 export function getCurrentUser(request: Request) {
-  // 清理过期 sessions
+  // Cleanup expired sessions
   authDb.cleanupExpiredSessions()
   
   const cookies = request.headers.get('cookie')
@@ -40,7 +40,7 @@ export function getCurrentUser(request: Request) {
 }
 
 /**
- * 检查用户是否已认证
+ * Check if user is authenticated
  */
 export function requireAuth(request: Request) {
   const user = getCurrentUser(request)
@@ -51,7 +51,7 @@ export function requireAuth(request: Request) {
 }
 
 /**
- * 检查用户是否为管理员
+ * Check if user is admin
  */
 export function requireAdmin(request: Request) {
   const user = requireAuth(request)
@@ -63,10 +63,11 @@ export function requireAdmin(request: Request) {
   }
 
   /**
-   * 生成登录 API
+   * Generate login API
    */
   static generateLoginApi() {
-    return `import { createFileRoute } from '@tanstack/solid-start'
+    return `import { createFileRoute } from '@tanstack/solid-router'
+import { json } from '@tanstack/solid-start'
 import { authDb } from '../../../lib/auth/database'
 
 export const Route = createFileRoute('/api/auth/login')({
@@ -75,19 +76,19 @@ export const Route = createFileRoute('/api/auth/login')({
     const { email, password } = await request.json()
     
     if (!email || !password) {
-      return json({ error: '邮箱和密码不能为空' }, { status: 400 })
+      return json({ error: 'Email and password are required' }, { status: 400 })
     }
     
-    // 验证用户
+    // Verify user
     const user = authDb.verifyUser(email, password)
     if (!user) {
-      return json({ error: '邮箱或密码错误' }, { status: 401 })
+      return json({ error: 'Invalid email or password' }, { status: 401 })
     }
     
-    // 创建 session
+    // Create session
     const session = authDb.createSession(user.id)
     
-    // 设置 cookie
+    // Set cookie
     const response = json({
       user: {
         id: user.id,
@@ -99,7 +100,7 @@ export const Route = createFileRoute('/api/auth/login')({
       }
     })
     
-    // HttpOnly cookie 防止 XSS
+    // HttpOnly cookie prevents XSS
     response.headers.set('Set-Cookie', 
       \`session=\${session.id}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=\${7 * 24 * 60 * 60}\`
     )
@@ -108,17 +109,18 @@ export const Route = createFileRoute('/api/auth/login')({
     
     } catch (error) {
       console.error('Login error:', error)
-      return json({ error: '登录失败' }, { status: 500 })
+      return json({ error: 'Login failed' }, { status: 500 })
     }
   }
 })`
   }
 
   /**
-   * 生成注册 API
+   * Generate register API
    */
   static generateRegisterApi() {
-    return `import { createFileRoute } from '@tanstack/solid-start'
+    return `import { createFileRoute } from '@tanstack/solid-router'
+import { json } from '@tanstack/solid-start'
 import { authDb } from '../../../lib/auth/database'
 
 export const Route = createFileRoute('/api/auth/register')({
@@ -127,31 +129,31 @@ export const Route = createFileRoute('/api/auth/register')({
     const { email, password, name } = await request.json()
     
     if (!email || !password || !name) {
-      return json({ error: '所有字段都是必填的' }, { status: 400 })
+      return json({ error: 'All fields are required' }, { status: 400 })
     }
     
-    // 简单的密码强度检查
+    // Simple password strength check
     if (password.length < 6) {
-      return json({ error: '密码至少需要6个字符' }, { status: 400 })
+      return json({ error: 'Password must be at least 6 characters' }, { status: 400 })
     }
     
-    // 检查邮箱格式
+    // Check email format
     const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/
     if (!emailRegex.test(email)) {
-      return json({ error: '邮箱格式不正确' }, { status: 400 })
+      return json({ error: 'Invalid email format' }, { status: 400 })
     }
     
     try {
-      // 创建用户
+      // Create user
       const user = authDb.createUser(email, name, password)
       if (!user) {
-        return json({ error: '创建用户失败' }, { status: 500 })
+        return json({ error: 'Failed to create user' }, { status: 500 })
       }
       
-      // 创建 session
+      // Create session
       const session = authDb.createSession(user.id)
       
-      // 设置 cookie
+      // Set cookie
       const response = json({
         user: {
           id: user.id,
@@ -170,31 +172,32 @@ export const Route = createFileRoute('/api/auth/register')({
       return response
       
     } catch (error) {
-      if (error.message.includes('该邮箱已被注册')) {
-        return json({ error: '该邮箱已被注册' }, { status: 409 })
+      if (error.message.includes('This email is already registered')) {
+        return json({ error: 'This email is already registered' }, { status: 409 })
       }
       throw error
     }
     
   } catch (error) {
     console.error('Register error:', error)
-    return json({ error: '注册失败' }, { status: 500 })
+    return json({ error: 'Registration failed' }, { status: 500 })
     }
   }
 })`
   }
 
   /**
-   * 生成登出 API
+   * Generate logout API
    */
   static generateLogoutApi() {
-    return `import { createFileRoute } from '@tanstack/solid-start'
+    return `import { createFileRoute } from '@tanstack/solid-router'
+import { json } from '@tanstack/solid-start'
 import { authDb } from '../../../lib/auth/database'
 
 export const Route = createFileRoute('/api/auth/logout')({
   POST: async ({ request }: { request: Request }) => {
   try {
-    // 从 cookie 获取 session ID
+    // Get session ID from cookie
     const cookies = request.headers.get('cookie')
     const sessionId = cookies
       ?.split(';')
@@ -202,12 +205,12 @@ export const Route = createFileRoute('/api/auth/logout')({
       ?.split('=')[1]
     
     if (sessionId) {
-      // 删除 session
+      // Delete session
       authDb.deleteSession(sessionId)
     }
     
-    // 清除 cookie
-    const response = json({ message: '登出成功' })
+    // Clear cookie
+    const response = json({ message: 'Logout successful' })
     response.headers.set('Set-Cookie', 
       'session=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0'
     )
@@ -216,17 +219,18 @@ export const Route = createFileRoute('/api/auth/logout')({
     
   } catch (error) {
     console.error('Logout error:', error)
-    return json({ error: '登出失败' }, { status: 500 })
+    return json({ error: 'Logout failed' }, { status: 500 })
     }
   }
 })`
   }
 
   /**
-   * 生成获取当前用户 API
+   * Generate get current user API
    */
   static generateMeApi() {
-    return `import { createFileRoute } from '@tanstack/solid-start'
+    return `import { createFileRoute } from '@tanstack/solid-router'
+import { json } from '@tanstack/solid-start'
 import { getCurrentUser } from '../../../utils/auth'
 
 export const Route = createFileRoute('/api/auth/me')({
@@ -235,39 +239,39 @@ export const Route = createFileRoute('/api/auth/me')({
     const user = getCurrentUser(request)
     
     if (!user) {
-      return json({ error: '未登录' }, { status: 401 })
+      return json({ error: 'Not logged in' }, { status: 401 })
     }
     
     return json({ user })
     
   } catch (error) {
     console.error('Get user error:', error)
-    return json({ error: '获取用户信息失败' }, { status: 500 })
+    return json({ error: 'Failed to get user information' }, { status: 500 })
     }
   }
 })`
   }
 
   /**
-   * 生成所有 API 文件
+   * Generate all API files
    */
   static async generate(projectPath) {
-    console.log('生成认证 API...')
-    // 创建 API 目录
+    console.log('Generating authentication API...')
+    // Create API directory
     const apiDir = join(projectPath, 'src', 'routes', 'api', 'auth')
     await fs.ensureDir(apiDir)
     
-    // 创建工具目录
+    // Create utils directory
     const utilsDir = join(projectPath, 'src', 'utils')
     await fs.ensureDir(utilsDir)
     
-    // 生成 API 文件
+    // Generate API files
     await fs.writeFile(join(apiDir, 'login.ts'), this.generateLoginApi())
     await fs.writeFile(join(apiDir, 'register.ts'), this.generateRegisterApi())
     await fs.writeFile(join(apiDir, 'logout.ts'), this.generateLogoutApi())
     await fs.writeFile(join(apiDir, 'me.ts'), this.generateMeApi())
     
-    // 生成认证工具函数
+    // Generate authentication utility functions
     await fs.writeFile(join(utilsDir, 'auth.ts'), this.generateAuthUtils())
   }
 }
