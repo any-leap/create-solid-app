@@ -17,7 +17,13 @@
     "dev": "tsc --watch",
     "test": "vitest",
     "publish:npm": "npm publish",
-    "publish:github": "npm publish --registry=https://npm.pkg.github.com"
+    "publish:github": "npm publish --registry=https://npm.pkg.github.com",
+    "check:templates": "node scripts/template-consistency-checker.js",
+    "sync:templates": "node scripts/sync-template-versions.js",
+    "fix:templates": "node scripts/fix-templates.js",
+    "test:templates": "node scripts/test-templates.js",
+    "templates:all": "npm run fix:templates && npm run sync:templates && npm run check:templates && npm run test:templates",
+    "templates": "node scripts/template-manager.js"
   },
   "keywords": [
     "solid",
@@ -35,6 +41,7 @@
     "fs-extra": "^11.3.0",
     "ora": "^8.1.1",
     "prompts": "^2.4.2",
+    "rimraf": "^6.0.1",
     "semver": "^7.6.3",
     "validate-npm-package-name": "^6.0.0"
   },

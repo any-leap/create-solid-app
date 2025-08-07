@@ -1,29 +1,20 @@
-import { defineConfig } from 'vite'
-import tsConfigPaths from 'vite-tsconfig-paths'
-import { tanstackStart } from '@tanstack/solid-start/plugin/vite'
-import viteSolid from 'vite-plugin-solid'
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite';
+import tsConfigPaths from 'vite-tsconfig-paths';
+import { tanstackStart } from '@tanstack/solid-start/plugin/vite';
+import viteSolid from 'vite-plugin-solid';
 
 export default defineConfig({
   server: {
-    port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
-    strictPort: false,
-    open: true,
+    port: 3000,
   },
   plugins: [
-    tailwindcss(),
-    tsConfigPaths({
-      projects: ['./tsconfig.json'],
-    }),
-    tanstackStart({ 
-      customViteSolidPlugin: true,
-    }),
+    tsConfigPaths(),
+    tanstackStart({ customViteSolidPlugin: true }),
     viteSolid({ ssr: true }),
+    tailwindcss(),
   ],
   build: {
-    sourcemap: true,
+    target: 'esnext',
   },
-  optimizeDeps: {
-    include: ['solid-js', '@tanstack/solid-start'],
-  },
-})
+});
