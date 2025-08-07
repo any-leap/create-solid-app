@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/solid-router'
+import { Button } from "@kobalte/core/button"
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -53,9 +54,12 @@ function Home() {
 
             {/* Action Buttons */}
             <div class="space-y-4">
-              <button class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-8 rounded-xl font-semibold text-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                🎯 开始开发
-              </button>
+              <Button 
+                class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-8 rounded-xl font-semibold text-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                onClick={() => alert('🎉 欢迎使用 @kobalte/core Button 组件！')}
+              >
+                🎯 开始开发 (Kobalte Button)
+              </Button>
               
               <div class="flex items-center justify-center space-x-6 text-sm text-gray-500">
                 <div class="flex items-center space-x-2">

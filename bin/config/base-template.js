@@ -17,6 +17,7 @@ export const basePackageJson = {
     serve: "vite preview"
   },
   dependencies: {
+    "@kobalte/core": "^0.13.11",
     "@tanstack/solid-router": "^1.130.12",
     "@tanstack/solid-start": "^1.130.15",
     "solid-js": "^1.9.8"
@@ -137,7 +138,6 @@ export const templateExtensions = {
   'full-stack': {
     // full-stack 添加更多功能性依赖
     additionalDependencies: {
-      "@kobalte/core": "^0.13.11",
       "@modular-forms/solid": "^0.25.1",
       "@tanstack/solid-query": "^5.83.1",
       "clsx": "^2.1.1",
@@ -158,7 +158,6 @@ export const templateExtensions = {
   admin: {
     // admin 包含所有高级功能
     additionalDependencies: {
-      "@kobalte/core": "^0.13.11",
       "@modular-forms/solid": "^0.25.1",
       "@tanstack/solid-devtools": "^0.1.1",
       "@tanstack/solid-query": "^5.83.1",

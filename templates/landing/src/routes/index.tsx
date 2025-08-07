@@ -1,4 +1,5 @@
-import { createFileRoute } from '@tanstack/solid-start'
+import { createFileRoute } from '@tanstack/solid-router'
+import { Button } from "@kobalte/core/button"
 
 export const Route = createFileRoute('/')({
   component: LandingPage,
@@ -69,9 +70,12 @@ function LandingPage() {
 
             {/* CTA Buttons */}
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                🚀 免费开始构建
-              </button>
+              <Button 
+                class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                onClick={() => alert('🎉 使用 @kobalte/core Button 创建现代化的 UI！')}
+              >
+                🚀 免费开始构建 (Kobalte)
+              </Button>
               <button class="border border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all duration-300 flex items-center space-x-2">
                 <span>▶️</span>
                 <span>观看演示</span>

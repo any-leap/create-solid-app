@@ -134,11 +134,11 @@ class VersionSyncer {
     // 某些模板允许有额外的依赖
     const allowedExtras = {
       'full-stack': [
-        '@kobalte/core', '@modular-forms/solid', '@tanstack/solid-query',
+        '@modular-forms/solid', '@tanstack/solid-query',
         'clsx', 'lucide-solid', 'redaxios', 'tailwind-merge', 'valibot'
       ],
       'admin': [
-        '@kobalte/core', '@modular-forms/solid', '@tanstack/solid-devtools',
+        '@modular-forms/solid', '@tanstack/solid-devtools',
         '@tanstack/solid-query', 'clsx', 'lucide-solid', 'redaxios', 
         'tailwind-merge', 'valibot'
       ]
