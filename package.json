@@ -1,6 +1,6 @@
 {
   "name": "@any-l/create-solid-app",
-  "version": "3.3.3",
+  "version": "3.3.4",
   "description": "Intelligent TanStack Solid Start project scaffolding tool",
   "type": "module",
   "bin": {
