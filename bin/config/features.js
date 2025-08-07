@@ -1,9 +1,9 @@
 /**
- * 功能模块配置定义
+ * Feature module configuration definitions
  */
 export const FEATURES = {
   database: { 
-    name: '数据库 (Drizzle ORM + SQLite)', 
+    name: 'Database (Drizzle ORM + SQLite)', 
     recommended: true,
     dependencies: {
       'drizzle-orm': '^0.44.4',
@@ -27,9 +27,9 @@ export const FEATURES = {
     ]
   },
   auth: { 
-    name: '用户认证 (Session + SQLite)', 
+    name: 'User Authentication (Session + SQLite)', 
     recommended: true,
-    note: '安全的服务器端session认证，使用Bun SQLite存储用户数据',
+    note: 'Secure server-side session authentication using Bun SQLite to store user data',
     files: [
       'src/lib/auth/database.ts',
       'src/lib/auth/auth-store.tsx', 
@@ -40,7 +40,7 @@ export const FEATURES = {
     ]
   },
   docker: { 
-    name: 'Docker 配置', 
+    name: 'Docker Configuration', 
     recommended: true,
     files: ['Dockerfile', 'docker-compose.yml']
   },
@@ -50,7 +50,7 @@ export const FEATURES = {
     files: ['.github/workflows/ci.yml']
   },
   testing: { 
-    name: '测试配置 (Vitest)', 
+    name: 'Testing Configuration (Vitest)', 
     recommended: false,
     devDependencies: {
       'vitest': '^3.2.4',
@@ -58,7 +58,7 @@ export const FEATURES = {
     }
   },
   monitoring: { 
-    name: '错误监控 (Sentry)', 
+    name: 'Error Monitoring (Sentry)', 
     recommended: false,
     envVars: ['SENTRY_DSN'],
     dependencies: {
@@ -67,16 +67,16 @@ export const FEATURES = {
     files: ['src/lib/monitoring/', 'src/components/SentryErrorBoundary.tsx']
   },
   analytics: { 
-    name: '数据分析 (Google Analytics)', 
+    name: 'Data Analytics (Google Analytics)', 
     recommended: false,
     envVars: ['ANALYTICS_ID'],
     files: ['src/lib/analytics/', 'src/components/Analytics.tsx'],
-    note: '包含 Google Analytics 4 集成和性能监控'
+    note: 'Includes Google Analytics 4 integration and performance monitoring'
   }
 }
 
 /**
- * 获取功能模块列表供选择器使用
+ * Get feature module list for selector use
  */
 export function getFeatureChoices() {
   return Object.entries(FEATURES).map(([key, feature]) => ({
@@ -87,14 +87,14 @@ export function getFeatureChoices() {
 }
 
 /**
- * 获取功能模块信息
+ * Get feature module information
  */
 export function getFeature(featureKey) {
   return FEATURES[featureKey]
 }
 
 /**
- * 获取所有选中功能的依赖
+ * Get all dependencies for selected features
  */
 export function getFeatureDependencies(selectedFeatures) {
   const dependencies = {}

@@ -1,31 +1,31 @@
 /**
- * 模板配置定义
+ * Template configuration definitions
  */
 export const TEMPLATES = {
   'minimal': {
-    name: '最小化应用',
-    description: '基础的 Solid Start 应用，适合快速原型开发',
+    name: 'Minimal Application',
+    description: 'Basic Solid Start application, perfect for rapid prototyping',
     features: ['typescript', 'tailwind']
   },
   'full-stack': {
-    name: '全栈应用',
-    description: '完整的全栈应用，包含数据库、认证、Docker配置',
+    name: 'Full-stack Application',
+    description: 'Complete full-stack application with database, authentication, and Docker configuration',
     features: ['typescript', 'tailwind', 'database', 'auth', 'docker']
   },
   'admin': {
-    name: '管理后台',
-    description: '企业级管理后台，包含仪表板、数据管理功能',
+    name: 'Admin Dashboard',
+    description: 'Enterprise-level admin dashboard with dashboard and data management features',
     features: ['typescript', 'tailwind', 'database', 'auth', 'dashboard']
   },
   'landing': {
-    name: '着陆页',
-    description: '营销着陆页模板，优化SEO和转化率',
+    name: 'Landing Page',
+    description: 'Marketing landing page template, optimized for SEO and conversion rates',
     features: ['typescript', 'tailwind', 'seo', 'analytics']
   }
 }
 
 /**
- * 获取模板列表供选择器使用
+ * Get template list for selector use
  */
 export function getTemplateChoices() {
   return Object.entries(TEMPLATES).map(([key, template]) => ({
@@ -36,14 +36,14 @@ export function getTemplateChoices() {
 }
 
 /**
- * 验证模板是否存在
+ * Validate if template exists
  */
 export function isValidTemplate(template) {
   return template && TEMPLATES.hasOwnProperty(template)
 }
 
 /**
- * 获取模板信息
+ * Get template information
  */
 export function getTemplate(templateKey) {
   return TEMPLATES[templateKey]

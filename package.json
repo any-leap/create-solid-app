@@ -1,7 +1,7 @@
 {
   "name": "@any-l/create-solid-app",
   "version": "3.2.0",
-  "description": "智能化的 TanStack Solid Start 项目脚手架",
+  "description": "Intelligent TanStack Solid Start project scaffolding tool",
   "type": "module",
   "bin": {
     "create-solid-app": "./bin/create-app.js"

@@ -2,18 +2,18 @@ import { join } from 'path'
 import fs from 'fs-extra'
 
 /**
- * 认证系统生成器
+ * Authentication system generator
  */
 export class AuthGenerator {
   /**
-   * 生成数据库 schema
+   * Generate database schema
    */
   static generateDatabaseSchema() {
-    return `import { Database } from 'bun:sqlite'
+    return `import Database from 'better-sqlite3'
 import { createHash, randomBytes } from 'crypto'
 
 /**
- * 用户类型定义
+ * User type definition
  */
 export interface User {
   id: number
@@ -27,7 +27,7 @@ export interface User {
 }
 
 /**
- * Session 类型定义
+ * Session type definition
  */
 export interface Session {
   id: string
@@ -37,7 +37,7 @@ export interface Session {
 }
 
 /**
- * 数据库管理类
+ * Database management class
  */
 export class AuthDatabase {
   private db: Database
@@ -48,10 +48,10 @@ export class AuthDatabase {
   }
 
   /**
-   * 初始化数据库表
+   * Initialize database tables
    */
   private initTables() {
-    // 创建用户表
+    // Create users table
     this.db.exec(\`
       CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -65,7 +65,7 @@ export class AuthDatabase {
       )
     \`)
 
-    // 创建 sessions 表
+    // Create sessions table
     this.db.exec(\`
       CREATE TABLE IF NOT EXISTS sessions (
         id TEXT PRIMARY KEY,
@@ -76,14 +76,14 @@ export class AuthDatabase {
       )
     \`)
 
-    // 创建索引
+    // Create indexes
     this.db.exec('CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)')
     this.db.exec('CREATE INDEX IF NOT EXISTS idx_sessions_user_id ON sessions(user_id)')
     this.db.exec('CREATE INDEX IF NOT EXISTS idx_sessions_expires ON sessions(expires_at)')
   }
 
   /**
-   * 创建用户
+   * Create user
    */
   createUser(email: string, name: string, password: string, role: 'user' | 'admin' = 'user'): User | null {
     const passwordHash = this.hashPassword(password)
@@ -99,14 +99,14 @@ export class AuthDatabase {
       return this.getUserById(result.lastInsertRowid as number)
     } catch (error) {
       if (error.message.includes('UNIQUE constraint failed')) {
-        throw new Error('该邮箱已被注册')
+        throw new Error('This email is already registered')
       }
       throw error
     }
   }
 
   /**
-   * 通过邮箱和密码验证用户
+   * Verify user by email and password
    */
   verifyUser(email: string, password: string): User | null {
     const stmt = this.db.prepare('SELECT * FROM users WHERE email = ?')
@@ -120,7 +120,7 @@ export class AuthDatabase {
   }
 
   /**
-   * 通过 ID 获取用户
+   * Get user by ID
    */
   getUserById(id: number): User | null {
     const stmt = this.db.prepare('SELECT * FROM users WHERE id = ?')
@@ -128,7 +128,7 @@ export class AuthDatabase {
   }
 
   /**
-   * 通过邮箱获取用户
+   * Get user by email
    */
   getUserByEmail(email: string): User | null {
     const stmt = this.db.prepare('SELECT * FROM users WHERE email = ?')
@@ -136,7 +136,7 @@ export class AuthDatabase {
   }
 
   /**
-   * 创建 session
+   * Create session
    */
   createSession(userId: number, expiresInMs: number = 7 * 24 * 60 * 60 * 1000): Session {
     const sessionId = randomBytes(32).toString('hex')
@@ -158,7 +158,7 @@ export class AuthDatabase {
   }
 
   /**
-   * 获取 session 和关联用户
+   * Get session and associated user
    */
   getSessionWithUser(sessionId: string): { session: Session; user: User } | null {
     const stmt = this.db.prepare(\`
@@ -198,7 +198,7 @@ export class AuthDatabase {
   }
 
   /**
-   * 删除 session（登出）
+   * Delete session (logout)
    */
   deleteSession(sessionId: string): void {
     const stmt = this.db.prepare('DELETE FROM sessions WHERE id = ?')
@@ -206,7 +206,7 @@ export class AuthDatabase {
   }
 
   /**
-   * 删除用户的所有 sessions
+   * Delete all user sessions
    */
   deleteUserSessions(userId: number): void {
     const stmt = this.db.prepare('DELETE FROM sessions WHERE user_id = ?')
@@ -214,7 +214,7 @@ export class AuthDatabase {
   }
 
   /**
-   * 清理过期的 sessions
+   * Clean up expired sessions
    */
   cleanupExpiredSessions(): void {
     const stmt = this.db.prepare('DELETE FROM sessions WHERE expires_at <= datetime("now")')
@@ -222,7 +222,7 @@ export class AuthDatabase {
   }
 
   /**
-   * 密码哈希
+   * Password hashing
    */
   private hashPassword(password: string): string {
     const salt = randomBytes(16).toString('hex')
@@ -231,7 +231,7 @@ export class AuthDatabase {
   }
 
   /**
-   * 验证密码
+   * Verify password
    */
   private verifyPassword(password: string, passwordHash: string): boolean {
     const [salt, hash] = passwordHash.split(':')
@@ -240,26 +240,26 @@ export class AuthDatabase {
   }
 
   /**
-   * 关闭数据库连接
+   * Close database connection
    */
   close(): void {
     this.db.close()
   }
 }
 
-// 创建全局数据库实例
+// Create global database instance
 export const authDb = new AuthDatabase()`
   }
 
   /**
-   * 生成客户端认证存储
+   * Generate client-side authentication store
    */
   static generateAuthStore() {
     return `import { createSignal, createContext, useContext, onMount, ParentComponent } from 'solid-js'
 import { createStore } from 'solid-js/store'
 
 /**
- * 用户类型定义（客户端）
+ * User type definition (client-side)
  */
 export interface User {
   id: number
@@ -271,7 +271,7 @@ export interface User {
 }
 
 /**
- * 认证状态类型
+ * Authentication state type
  */
 export interface AuthState {
   user: User | null
@@ -280,7 +280,7 @@ export interface AuthState {
 }
 
 /**
- * 认证上下文类型
+ * Authentication context type
  */
 export interface AuthContextType {
   state: AuthState
@@ -290,11 +290,11 @@ export interface AuthContextType {
   refreshUser: () => Promise<void>
 }
 
-// 创建认证上下文
+// Create authentication context
 const AuthContext = createContext<AuthContextType>()
 
 /**
- * 认证提供者组件 - 基于服务器端 Session
+ * Authentication provider component - based on server-side Session
  */
 export const AuthProvider: ParentComponent = (props) => {
   const [state, setState] = createStore<AuthState>({
@@ -304,7 +304,7 @@ export const AuthProvider: ParentComponent = (props) => {
   })
 
   /**
-   * 登录函数 - 使用 httpOnly cookie
+   * Login function - using httpOnly cookie
    */
   const login = async (email: string, password: string) => {
     setState('isLoading', true)
@@ -313,13 +313,13 @@ export const AuthProvider: ParentComponent = (props) => {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include', // 重要：包含 cookies
+        credentials: 'include', // Important: include cookies
         body: JSON.stringify({ email, password })
       })
       
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.error || '登录失败')
+        throw new Error(error.error || 'Login failed')
       }
       
       const { user } = await response.json()
@@ -336,7 +336,7 @@ export const AuthProvider: ParentComponent = (props) => {
   }
 
   /**
-   * 注册函数
+   * Register function
    */
   const register = async (email: string, password: string, name: string) => {
     setState('isLoading', true)
@@ -351,7 +351,7 @@ export const AuthProvider: ParentComponent = (props) => {
       
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.error || '注册失败')
+        throw new Error(error.error || 'Registration failed')
       }
       
       const { user } = await response.json()
@@ -368,7 +368,7 @@ export const AuthProvider: ParentComponent = (props) => {
   }
 
   /**
-   * 登出函数
+   * Logout function
    */
   const logout = async () => {
     try {
@@ -388,7 +388,7 @@ export const AuthProvider: ParentComponent = (props) => {
   }
 
   /**
-   * 刷新用户信息 - 检查服务器端 session
+   * Refresh user information - check server-side session
    */
   const refreshUser = async () => {
     try {
@@ -420,7 +420,7 @@ export const AuthProvider: ParentComponent = (props) => {
     }
   }
 
-  // 组件挂载时检查认证状态
+  // Check authentication status on component mount
   onMount(() => {
     refreshUser()
   })
@@ -441,7 +441,7 @@ export const AuthProvider: ParentComponent = (props) => {
 }
 
 /**
- * 使用认证的 Hook
+ * Authentication Hook
  */
 export function useAuth() {
   const context = useContext(AuthContext)
@@ -453,14 +453,14 @@ export function useAuth() {
   }
 
   /**
-   * 生成认证组件
+   * Generate authentication components
    */
   static generateAuthComponents() {
     return `import { createSignal, Show } from 'solid-js'
 import { useAuth } from '../lib/auth/auth-store'
 
 /**
- * 登录表单组件
+ * Login form component
  */
 export function LoginForm() {
   const { login } = useAuth()
@@ -477,7 +477,7 @@ export function LoginForm() {
     try {
       await login(email(), password())
     } catch (err) {
-      setError(err instanceof Error ? err.message : '登录失败')
+      setError(err instanceof Error ? err.message : 'Login failed')
     } finally {
       setIsLoading(false)
     }
@@ -485,12 +485,12 @@ export function LoginForm() {
 
   return (
     <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold mb-6 text-center">登录</h2>
+      <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
       
       <form onSubmit={handleSubmit} class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            邮箱
+            Email
           </label>
           <input
             type="email"
@@ -503,7 +503,7 @@ export function LoginForm() {
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            密码
+            Password
           </label>
           <input
             type="password"
@@ -523,7 +523,7 @@ export function LoginForm() {
           disabled={isLoading()}
           class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          {isLoading() ? '登录中...' : '登录'}
+          {isLoading() ? 'Logging in...' : 'Login'}
         </button>
       </form>
     </div>
@@ -531,7 +531,7 @@ export function LoginForm() {
 }
 
 /**
- * 注册表单组件
+ * Registration form component
  */
 export function RegisterForm() {
   const { register } = useAuth()
@@ -546,7 +546,7 @@ export function RegisterForm() {
     e.preventDefault()
     
     if (password() !== confirmPassword()) {
-      setError('密码不匹配')
+      setError('Passwords do not match')
       return
     }
     
@@ -556,7 +556,7 @@ export function RegisterForm() {
     try {
       await register(email(), password(), name())
     } catch (err) {
-      setError(err instanceof Error ? err.message : '注册失败')
+      setError(err instanceof Error ? err.message : 'Registration failed')
     } finally {
       setIsLoading(false)
     }
@@ -564,12 +564,12 @@ export function RegisterForm() {
 
   return (
     <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold mb-6 text-center">注册</h2>
+      <h2 class="text-2xl font-bold mb-6 text-center">Register</h2>
       
       <form onSubmit={handleSubmit} class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            姓名
+            Name
           </label>
           <input
             type="text"
@@ -582,7 +582,7 @@ export function RegisterForm() {
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            邮箱
+            Email
           </label>
           <input
             type="email"
@@ -595,7 +595,7 @@ export function RegisterForm() {
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            密码
+            Password
           </label>
           <input
             type="password"
@@ -608,7 +608,7 @@ export function RegisterForm() {
         
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">
-            确认密码
+            Confirm Password
           </label>
           <input
             type="password"
@@ -628,7 +628,7 @@ export function RegisterForm() {
           disabled={isLoading()}
           class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          {isLoading() ? '注册中...' : '注册'}
+          {isLoading() ? 'Registering...' : 'Register'}
         </button>
       </form>
     </div>
@@ -636,7 +636,7 @@ export function RegisterForm() {
 }
 
 /**
- * 用户菜单组件
+ * User menu component
  */
 export function UserMenu() {
   const { state, logout } = useAuth()
@@ -646,18 +646,18 @@ export function UserMenu() {
       when={state.isAuthenticated && state.user} 
       fallback={
         <div class="flex space-x-2">
-          <a href="/login" class="text-blue-600 hover:text-blue-800">登录</a>
-          <a href="/register" class="text-green-600 hover:text-green-800">注册</a>
+          <a href="/login" class="text-blue-600 hover:text-blue-800">Login</a>
+          <a href="/register" class="text-green-600 hover:text-green-800">Register</a>
         </div>
       }
     >
       <div class="flex items-center space-x-4">
-        <span class="text-gray-700">欢迎，{state.user?.name}</span>
+        <span class="text-gray-700">Welcome, {state.user?.name}</span>
         <button
           onClick={logout}
           class="text-red-600 hover:text-red-800"
         >
-          登出
+          Logout
         </button>
       </div>
     </Show>
@@ -666,50 +666,50 @@ export function UserMenu() {
   }
 
   /**
-   * 生成认证相关文件
+   * Generate authentication related files
    */
   static async generate(projectPath) {
-    // 创建必要的目录
+    // Create necessary directories
     const authDir = join(projectPath, 'src', 'lib', 'auth')
     const dataDir = join(projectPath, 'data')
     await fs.ensureDir(authDir)
     await fs.ensureDir(dataDir)
     
-    // 生成数据库层
+    // Generate database layer
     await fs.writeFile(
       join(authDir, 'database.ts'), 
       this.generateDatabaseSchema()
     )
     
-    // 生成客户端认证存储
+    // Generate client-side authentication store
     await fs.writeFile(
       join(authDir, 'auth-store.tsx'), 
       this.generateAuthStore()
     )
     
-    // 生成认证组件
+    // Generate authentication components
     await fs.writeFile(
       join(projectPath, 'src', 'components', 'Auth.tsx'),
       this.generateAuthComponents()
     )
     
-    // 生成 API 路由
+    // Generate API routes
     const { AuthApiGenerator } = await import('./auth-api.js')
     await AuthApiGenerator.generate(projectPath)
     
-    // 生成使用说明
-    const readme = `# 认证系统 - Session Based (安全升级版)
+    // Generate usage documentation
+    const readme = `# Authentication System - Session Based (Security Upgrade)
 
 ## 🔐 安全特性
 - ✅ 服务器端 Session 存储（比 JWT 更安全）
 - ✅ HttpOnly Cookies 防止 XSS 攻击
 - ✅ SQLite 数据库存储用户和会话
-- ✅ 密码安全哈希 (Salt + SHA256)
+- ✅ Password安全哈希 (Salt + SHA256)
 - ✅ 自动 Session 过期清理
 - ✅ CSRF 保护 (SameSite cookies)
 
 ## 🚀 功能特性
-- ✅ 用户注册/登录/登出
+- ✅ 用户Register/Login/Logout
 - ✅ 用户角色管理 (user/admin)
 - ✅ 自动会话刷新
 - ✅ 受保护路由中间件
@@ -722,9 +722,9 @@ src/
 │   ├── database.ts          # SQLite 数据库层
 │   └── auth-store.ts        # 客户端状态管理
 ├── routes/api/auth/
-│   ├── login.ts             # 登录 API
-│   ├── register.ts          # 注册 API
-│   ├── logout.ts            # 登出 API
+│   ├── login.ts             # Login API
+│   ├── register.ts          # Register API
+│   ├── logout.ts            # Logout API
 │   └── me.ts                # 获取当前用户
 ├── middleware/
 │   └── auth.ts              # 认证中间件
@@ -796,7 +796,7 @@ function MyComponent() {
 
 ### 3. 使用中间件保护路由
 \`\`\`tsx
-// 需要登录的路由
+// 需要Login的路由
 import { requireAuth } from '../middleware/auth'
 
 export const Route = createFileRoute('/dashboard')({
@@ -821,7 +821,7 @@ export async function serverFunction({ request }) {
   const user = getCurrentUser(request)
   
   if (!user) {
-    throw new Error('未登录')
+    throw new Error('未Login')
   }
   
   // 使用 user.id, user.role 等
@@ -836,15 +836,15 @@ export async function serverFunction({ request }) {
 - 前端 JavaScript 无法访问，防止 XSS 攻击
 - 自动在请求中发送，无需手动管理
 
-### 2. 密码安全
+### 2. Password安全
 - 使用随机 salt + SHA256 哈希
-- 密码明文不存储在数据库中
+- Password明文不存储在数据库中
 - 防止彩虹表攻击
 
 ### 3. Session 管理
 - 服务器端存储会话状态
 - 自动清理过期会话
-- 支持多设备登录管理
+- 支持多设备Login管理
 
 ### 4. CSRF 保护
 - SameSite=Strict cookie 设置
@@ -855,7 +855,7 @@ export async function serverFunction({ request }) {
 1. **HTTPS**: 生产环境必须使用 HTTPS
 2. **数据库备份**: 定期备份 SQLite 数据库
 3. **Session 清理**: 设置定时任务清理过期会话
-4. **监控**: 添加登录失败监控和限制
+4. **监控**: 添加Login失败监控和限制
 
 ## 🔧 环境变量
 

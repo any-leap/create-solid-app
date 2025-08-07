@@ -1,110 +1,110 @@
 # @any-l/create-solid-app
 
-> 🚀 现代化的 TanStack Solid Start 项目脚手架工具
+> 🚀 Modern TanStack Solid Start project scaffolding tool
 
-## 📦 快速开始
+## 📦 Quick Start
 
-使用 Bun（推荐）：
+Using Bun (recommended):
 
 ```bash
 bunx @any-l/create-solid-app my-project
 ```
 
-使用 npm：
+Using npm:
 
 ```bash
 npx @any-l/create-solid-app my-project
 ```
 
-## ✨ 特性
+## ✨ Features
 
-- 🎨 **交互式配置** - 根据需求定制项目功能
-- ⚡ **多种模板** - 最小化、全栈、管理后台、着陆页
-- 🛠️ **可选功能模块** - 数据库、认证、Docker、CI/CD、测试
-- 📦 **智能依赖管理** - 只安装需要的依赖包
-- 🔄 **自动化配置** - 一键生成完整项目结构
+- 🎨 **Interactive Configuration** - Customize project features based on your needs
+- ⚡ **Multiple Templates** - Minimal, Full-stack, Admin, Landing page
+- 🛠️ **Optional Feature Modules** - Database, Authentication, Docker, CI/CD, Testing
+- 📦 **Smart Dependency Management** - Install only necessary dependencies
+- 🔄 **Automated Configuration** - One-click generation of complete project structure
 
-## 🎯 项目模板
+## 🎯 Project Templates
 
-### 📌 最小化版本 (minimal)
+### 📌 Minimal (minimal)
 
-- 基础 TanStack Solid Start 配置
+- Basic TanStack Solid Start configuration
 - TypeScript + Tailwind CSS
-- 开发工具配置
+- Development tooling setup
 
-### 🚀 全栈版本 (full-stack)
+### 🚀 Full-stack (full-stack)
 
-- 完整的全栈应用框架
-- 数据库集成 (Drizzle ORM)
-- API 路由和中间件
-- 用户认证系统
+- Complete full-stack application framework
+- Database integration (Drizzle ORM)
+- API routes and middleware
+- User authentication system
 
-### 🏢 管理后台 (admin)
+### 🏢 Admin Dashboard (admin)
 
-- 现代化管理界面
-- 数据表格和表单组件
-- 权限管理系统
-- 仪表板布局
+- Modern admin interface
+- Data tables and form components
+- Permission management system
+- Dashboard layout
 
-### 🌐 着陆页 (landing)
+### 🌐 Landing Page (landing)
 
-- 营销导向的页面结构
-- SEO 优化配置
-- 响应式设计
-- 性能优化
+- Marketing-oriented page structure
+- SEO optimization configuration
+- Responsive design
+- Performance optimization
 
-## ⚙️ 可选功能
+## ⚙️ Optional Features
 
-- **🗄️ 数据库** - Drizzle ORM + SQLite/PostgreSQL
-- **🔐 用户认证** - Auth.js 集成
-- **🐳 Docker** - 容器化部署配置
-- **⚙️ CI/CD** - GitHub Actions 工作流
-- **🧪 测试** - Vitest 测试框架
-- **📊 监控** - 性能和错误监控
+- **🗄️ Database** - Drizzle ORM + SQLite/PostgreSQL
+- **🔐 User Authentication** - Auth.js integration
+- **🐳 Docker** - Containerized deployment configuration
+- **⚙️ CI/CD** - GitHub Actions workflow
+- **🧪 Testing** - Vitest testing framework
+- **📊 Monitoring** - Performance and error monitoring
 
-## 📖 使用示例
+## 📖 Usage Example
 
 ```bash
-# 创建项目
+# Create project
 bunx @any-l/create-solid-app my-awesome-app
 
-# 选择模板和功能
-? 选择项目模板: Full Stack Application
-? 选择功能模块: Database, Authentication, Docker
+# Select template and features
+? Choose project template: Full Stack Application
+? Select feature modules: Database, Authentication, Docker
 
-# 进入项目目录
+# Enter project directory
 cd my-awesome-app
 
-# 启动开发服务器
+# Start development server
 bun run dev
 ```
 
-## 🚀 生成的项目结构
+## 🚀 Generated Project Structure
 
 ```
 my-awesome-app/
 ├── src/
-│   ├── components/     # 可复用组件
-│   ├── routes/        # 页面路由
-│   ├── lib/           # 工具库
-│   └── styles/        # 样式文件
-├── public/            # 静态资源
-├── drizzle/          # 数据库相关（可选）
-├── docker/           # Docker 配置（可选）
-├── .github/          # CI/CD 工作流（可选）
+│   ├── components/     # Reusable components
+│   ├── routes/        # Page routes
+│   ├── lib/           # Utility libraries
+│   └── styles/        # Style files
+├── public/            # Static assets
+├── drizzle/          # Database related (optional)
+├── docker/           # Docker configuration (optional)
+├── .github/          # CI/CD workflow (optional)
 └── package.json
 ```
 
-## 🛠️ 开发命令
+## 🛠️ Development Commands
 
-生成的项目包含以下命令：
+The generated project includes the following commands:
 
 ```bash
-bun run dev        # 启动开发服务器
-bun run build      # 构建生产版本
-bun run start      # 启动生产服务器
-bun run test       # 运行测试
-bun run lint       # 代码检查
+bun run dev        # Start development server
+bun run build      # Build production version
+bun run start      # Start production server
+bun run test       # Run tests
+bun run lint       # Code linting
 ```
 
 ## 📋 系统要求
@@ -120,98 +120,98 @@ bun run lint       # 代码检查
 
 #### ✅ Bun 的优势（包管理）
 
-- 🚀 **极速安装**: 比 npm/yarn 快 10-20 倍
-- 📦 **兼容性好**: 完全兼容 npm 生态
-- 🔧 **内置工具**: 集成了 bundler、test runner、package manager
+- 🚀 **Ultra-fast Installation**: 10-20 times faster than npm/yarn
+- 📦 **Great Compatibility**: Fully compatible with npm ecosystem
+- 🔧 **Built-in Tools**: Integrated bundler, test runner, and package manager
 
-#### ✅ Node.js 的必要性（运行时）
+#### ✅ Node.js Necessity (Runtime)
 
-- 🏛️ **官方支持**: TanStack Start 官方基于 Node.js 设计
-- 🔌 **API 兼容**: 依赖 Node.js 特有的 API 和功能
-- 🛡️ **稳定可靠**: 生产环境的最佳选择
+- 🏛️ **Official Support**: TanStack Start is officially designed based on Node.js
+- 🔌 **API Compatibility**: Depends on Node.js-specific APIs and features
+- 🛡️ **Stable and Reliable**: Best choice for production environment
 
-> **重要提示**: 根据 [Bun 官方文档](https://bun.sh/guides/ecosystem/solidstart)，TanStack Start 目前依赖一些 Bun 尚未实现的 Node.js API。因此，我们使用 Bun 来初始化项目和安装依赖，但使用 Node.js 来运行开发服务器。
+> **Important Note**: According to [Bun official documentation](https://bun.sh/guides/ecosystem/solidstart), TanStack Start currently depends on some Node.js APIs that Bun has not yet implemented. Therefore, we use Bun to initialize projects and install dependencies, but use Node.js to run the development server.
 
-### 🗄️ 数据库集成（Drizzle ORM）
+### 🗄️ Database Integration (Drizzle ORM)
 
-如果选择了数据库功能，脚手架会自动配置 [Drizzle ORM](https://bun.sh/guides/ecosystem/drizzle)：
+If you choose the database feature, the scaffolding will automatically configure [Drizzle ORM](https://bun.sh/guides/ecosystem/drizzle):
 
 ```bash
-# 安装 Drizzle ORM（运行时）
+# Install Drizzle ORM (runtime)
 bun add drizzle-orm
 
-# 安装 Drizzle Kit（开发工具）
+# Install Drizzle Kit (development tool)
 bun add -D drizzle-kit
 ```
 
-这样既利用了 Bun 的快速安装优势，又确保了与 TanStack Start 的完美兼容。
+This leverages both Bun's fast installation advantages and ensures perfect compatibility with TanStack Start.
 
-### 🔄 完整的开发流程
+### 🔄 Complete Development Workflow
 
 ```bash
-# 1. 使用 Bun 快速安装依赖
+# 1. Use Bun for fast dependency installation
 bun install
 
-# 2. 使用 Node.js 运行开发服务器（通过 Vite）
-bun run dev     # 这实际上运行的是 vite dev（使用 Node.js）
+# 2. Use Node.js to run development server (via Vite)
+bun run dev     # This actually runs vite dev (using Node.js)
 
-# 3. 使用 Bun 添加新依赖
+# 3. Use Bun to add new dependencies
 bun add some-package
 
-# 4. 使用 Node.js 构建生产版本
-bun run build  # 这实际上运行的是 vite build（使用 Node.js）
+# 4. Use Node.js to build production version
+bun run build  # This actually runs vite build (using Node.js)
 ```
 
-## 🔧 配置
+## 🔧 Configuration
 
-脚手架会自动生成以下配置文件：
+The scaffolding automatically generates the following configuration files:
 
-- `tailwind.config.mjs` - Tailwind CSS 配置
-- `tsconfig.json` - TypeScript 配置
-- `vite.config.ts` - Vite 构建配置
-- `.env.example` - 环境变量模板
-- `drizzle.config.ts` - 数据库配置（如选择）
-- `package.json` - 使用标准 Vite 命令，兼容 Node.js 运行时
+- `tailwind.config.mjs` - Tailwind CSS configuration
+- `tsconfig.json` - TypeScript configuration
+- `vite.config.ts` - Vite build configuration
+- `.env.example` - Environment variables template
+- `drizzle.config.ts` - Database configuration (if selected)
+- `package.json` - Uses standard Vite commands, compatible with Node.js runtime
 
-## 💡 最佳实践
+## 💡 Best Practices
 
-### 🚀 推荐的开发工作流
+### 🚀 Recommended Development Workflow
 
-1. **使用 Bun 管理依赖**:
-
-   ```bash
-   bun add package-name     # 添加依赖
-   bun remove package-name  # 移除依赖
-   bun update              # 更新所有依赖
-   ```
-
-2. **使用标准命令开发**:
+1. **Use Bun for dependency management**:
 
    ```bash
-   bun run dev    # 开发服务器（底层使用 Node.js + Vite）
-   bun run build  # 生产构建（底层使用 Node.js + Vite）
+   bun add package-name     # Add dependency
+   bun remove package-name  # Remove dependency
+   bun update              # Update all dependencies
    ```
 
-3. **数据库开发**（如果选择了数据库功能）:
+2. **Use standard commands for development**:
+
    ```bash
-   bun run db:generate  # 生成迁移文件
-   bun run db:migrate   # 应用迁移
-   bun run db:studio    # 打开数据库管理界面
+   bun run dev    # Development server (uses Node.js + Vite underneath)
+   bun run build  # Production build (uses Node.js + Vite underneath)
    ```
 
-### ❓ 常见问题
+3. **Database development** (if database feature is selected):
+   ```bash
+   bun run db:generate  # Generate migration files
+   bun run db:migrate   # Apply migrations
+   bun run db:studio    # Open database management interface
+   ```
 
-**Q: 为什么不直接使用 Bun 运行 TanStack Start？**
+### ❓ Frequently Asked Questions
 
-A: TanStack Start 依赖一些 Bun 尚未完全实现的 Node.js API。按照 [Bun 官方建议](https://bun.sh/guides/ecosystem/solidstart)，我们使用 Bun 来管理依赖（更快），使用 Node.js 来运行应用（更稳定）。
+**Q: Why not use Bun directly to run TanStack Start?**
 
-**Q: 生产环境怎么部署？**
+A: TanStack Start depends on some Node.js APIs that Bun hasn't fully implemented yet. Following [Bun's official recommendation](https://bun.sh/guides/ecosystem/solidstart), we use Bun for dependency management (faster) and Node.js for running the application (more stable).
 
-A: 生产环境建议使用 Node.js。构建命令 `bun run build` 会生成兼容 Node.js 的产物，可以直接部署到任何支持 Node.js 的环境。
+**Q: How to deploy in production environment?**
 
-**Q: 可以完全使用 npm 吗？**
+A: Production deployment is recommended with Node.js. The build command `bun run build` generates Node.js-compatible artifacts that can be deployed directly to any Node.js-supporting environment.
 
-A: 当然可以！所有命令都兼容 npm：
+**Q: Can I use npm exclusively?**
+
+A: Absolutely! All commands are compatible with npm:
 
 ```bash
 npx @any-l/create-solid-app my-project
@@ -220,39 +220,39 @@ npm install
 npm run dev
 ```
 
-**Q: Vite 为什么选择 Node.js 而不是 Bun？**
+**Q: Why choose Node.js over Bun for Vite?**
 
-A: 虽然 Bun 有自己的 bundler，但 Vite 在 SolidJS 生态系统中有更好的插件支持和稳定性。我们的策略是"包管理用 Bun，构建用 Vite"，充分利用两者的优势。
+A: Although Bun has its own bundler, Vite has better plugin support and stability in the SolidJS ecosystem. Our strategy is "use Bun for package management, use Vite for building", taking full advantage of both.
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Welcome to submit Issues and Pull Requests!
 
-## 📄 许可证
+## 📄 License
 
 MIT License
 
-## 📝 版本历史
+## 📝 Version History
 
-### v3.0.0 (最新) - 重大更新
+### v3.0.0 (Latest) - Major Update
 
-- ✅ **修复核心问题**: 基于 TanStack Start 官方文档重新设计
-- ✅ **Bun + Node.js 架构**: 最佳的性能和兼容性平衡
-- ✅ **依赖修复**: 添加缺失的 `@tanstack/solid-router`
-- ✅ **配置优化**: TypeScript 和 Vite 配置符合最佳实践
-- ✅ **路由修复**: 正确的导入路径和配置
+- ✅ **Fixed Core Issues**: Redesigned based on TanStack Start official documentation
+- ✅ **Bun + Node.js Architecture**: Best balance of performance and compatibility
+- ✅ **Dependency Fixes**: Added missing `@tanstack/solid-router`
+- ✅ **Configuration Optimization**: TypeScript and Vite configurations follow best practices
+- ✅ **Routing Fixes**: Correct import paths and configuration
 
-### v2.x - 已弃用
+### v2.x - Deprecated
 
-⚠️ v2.x 版本存在配置问题，强烈建议升级到 v3.0.0
+⚠️ v2.x versions have configuration issues, strongly recommend upgrading to v3.0.0
 
-## 🔗 相关链接
+## 🔗 Related Links
 
-- [📚 CHANGELOG.md](./CHANGELOG.md) - 详细更新日志
-- [🔄 MIGRATION-V3.md](./MIGRATION-V3.md) - v3.0.0 迁移指南
-- [🌐 TanStack Start 文档](https://tanstack.com/start/latest/docs/framework/solid/build-from-scratch)
-- [⚡ Bun 生态指南](https://bun.sh/guides/ecosystem/solidstart)
+- [📚 CHANGELOG.md](./CHANGELOG.md) - Detailed update log
+- [🔄 MIGRATION-V3.md](./MIGRATION-V3.md) - v3.0.0 migration guide
+- [🌐 TanStack Start Documentation](https://tanstack.com/start/latest/docs/framework/solid/build-from-scratch)
+- [⚡ Bun Ecosystem Guide](https://bun.sh/guides/ecosystem/solidstart)
 
 ---
 
-**🎉 开始构建您的下一个 Solid 应用吧！**
+**🎉 Start building your next Solid application!**

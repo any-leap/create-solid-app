@@ -22,16 +22,16 @@ function LandingPage() {
             </div>
             <nav class="hidden md:flex items-center space-x-8">
               <a class="text-gray-600 hover:text-blue-600 transition-colors font-medium" href="#features">
-                特性
+                Features
               </a>
               <a class="text-gray-600 hover:text-blue-600 transition-colors font-medium" href="#pricing">
-                价格
+                Pricing
               </a>
               <a class="text-gray-600 hover:text-blue-600 transition-colors font-medium" href="#testimonials">
-                案例
+                Testimonials
               </a>
               <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
-                免费试用
+                Free Trial
               </button>
             </nav>
           </div>
@@ -49,42 +49,42 @@ function LandingPage() {
           <div class="text-center">
             <div class="mb-8">
               <div class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-6">
-                🎉 全新版本 v2.0 现已发布
+                🎉 New Version v2.0 Now Available
               </div>
             </div>
             
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-              构建{' '}
+              Build{' '}
               <span class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                下一代
+                Next-Gen
               </span>
               <br />
-              Web 应用
+              Web Apps
             </h1>
             
             <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-              基于 TanStack Solid Start 的现代化开发平台，
-              让您专注于<strong>创新</strong>而非配置。
-              快速构建高性能、可扩展的全栈应用。
+              Modern development platform based on TanStack Solid Start,
+              focus on <strong>innovation</strong> rather than configuration.
+              Rapidly build high-performance, scalable full-stack applications.
             </p>
 
             {/* CTA Buttons */}
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <Button 
                 class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                onClick={() => alert('🎉 使用 @kobalte/core Button 创建现代化的 UI！')}
+                onClick={() => alert('🎉 Create modern UI with @kobalte/core Button!')}
               >
-                🚀 免费开始构建 (Kobalte)
+                🚀 Start Building Free (Kobalte)
               </Button>
               <button class="border border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all duration-300 flex items-center space-x-2">
                 <span>▶️</span>
-                <span>观看演示</span>
+                <span>Watch Demo</span>
               </button>
             </div>
 
             {/* Social Proof */}
             <div class="flex flex-col items-center space-y-4 text-gray-500">
-              <p class="text-sm">已被全球 50,000+ 开发者信赖</p>
+              <p class="text-sm">Trusted by 50,000+ developers worldwide</p>
               <div class="flex items-center space-x-8 opacity-60">
                 <CompanyLogo name="GitHub" />
                 <CompanyLogo name="Vercel" />
@@ -101,48 +101,48 @@ function LandingPage() {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-              为什么选择 <span class="text-blue-600">SolidApp</span>？
+              Why Choose <span class="text-blue-600">SolidApp</span>?
             </h2>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-              我们重新定义了 Web 开发体验，让复杂的技术变得简单易用
+              We redefine the Web development experience, making complex technology simple and easy to use
             </p>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <FeatureCard 
               icon="⚡"
-              title="极速性能"
-              description="基于 Solid.js 的响应式框架，比 React 快 2-3 倍，包体积更小"
+              title="Lightning Fast"
+              description="Reactive framework based on Solid.js, 2-3x faster than React with smaller bundle size"
               gradient="from-yellow-400 to-orange-500"
             />
             <FeatureCard 
               icon="🛡️"
-              title="类型安全"
-              description="端到端 TypeScript 支持，在编译时发现错误，提高代码质量"
+              title="Type Safe"
+              description="End-to-end TypeScript support, catch errors at compile time, improve code quality"
               gradient="from-blue-400 to-purple-500"
             />
             <FeatureCard 
               icon="🚀"
-              title="开箱即用"
-              description="数据库、认证、API、部署配置一应俱全，零配置开始开发"
+              title="Ready to Use"
+              description="Database, authentication, API, deployment configuration all included, zero configuration to start development"
               gradient="from-green-400 to-blue-500"
             />
             <FeatureCard 
               icon="🎨"
-              title="现代化 UI"
-              description="Tailwind CSS + 精美组件库，让您的应用颜值爆表"
+              title="Modern UI"
+              description="Tailwind CSS + beautiful component library, make your app look amazing"
               gradient="from-pink-400 to-red-500"
             />
             <FeatureCard 
               icon="🔧"
-              title="开发者体验"
-              description="热重载、智能提示、一键部署，让开发变成一种享受"
+              title="Developer Experience"
+              description="Hot reload, smart suggestions, one-click deployment, make development enjoyable"
               gradient="from-purple-400 to-indigo-500"
             />
             <FeatureCard 
               icon="🌐"
-              title="全栈支持"
-              description="前端、后端、数据库、部署，全栈开发一站式解决方案"
+              title="Full-stack Support"
+              description="Frontend, backend, database, deployment - complete full-stack development solution"
               gradient="from-teal-400 to-cyan-500"
             />
           </div>
@@ -154,25 +154,25 @@ function LandingPage() {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-              开发者都在说什么？
+              What Are Developers Saying?
             </h2>
-            <p class="text-xl text-gray-600">真实用户，真实反馈</p>
+            <p class="text-xl text-gray-600">Real users, real feedback</p>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <TestimonialCard 
-              quote="SolidApp 让我的开发效率提升了 300%，真的是太棒了！"
-              author="张伟 - 全栈工程师"
+              quote="SolidApp improved my development efficiency by 300%, it's absolutely amazing!"
+              author="John Smith - Full-stack Engineer"
               avatar="👨‍💻"
             />
             <TestimonialCard 
-              quote="终于找到了完美的 Solid Start 脚手架，推荐给所有开发者！"
-              author="李晓明 - 前端架构师"
+              quote="Finally found the perfect Solid Start scaffolding, recommend it to all developers!"
+              author="Michael Lee - Frontend Architect"
               avatar="👨‍🚀"
             />
             <TestimonialCard 
-              quote="从设置到部署只用了 10 分钟，这就是我要的开发体验。"
-              author="王小红 - 创业者"
+              quote="From setup to deployment took only 10 minutes, this is the development experience I want."
+              author="Sarah Wang - Entrepreneur"
               avatar="👩‍💼"
             />
           </div>
@@ -183,27 +183,27 @@ function LandingPage() {
       <section class="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
-            准备开始构建了吗？
+            Ready to Start Building?
           </h2>
           <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-            加入全球 50,000+ 开发者的行列，开始构建下一代 Web 应用
+            Join 50,000+ developers worldwide and start building next-generation Web applications
           </p>
           
           <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <div class="flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2">
               <input 
                 class="bg-transparent border-none outline-none text-white placeholder-blue-200 text-lg"
-                placeholder="输入您的邮箱"
+                placeholder="Enter your email"
                 type="email"
               />
             </div>
             <button class="bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
-              免费开始
+              Start Free
             </button>
           </div>
           
           <p class="text-sm text-blue-200">
-            🔒 我们重视您的隐私，绝不会发送垃圾邮件
+            🔒 We respect your privacy and will never send spam emails
           </p>
         </div>
       </section>
@@ -219,42 +219,42 @@ function LandingPage() {
                 </div>
                 <span class="font-bold text-xl">SolidApp</span>
               </div>
-              <p class="text-gray-400">构建现代化 Web 应用的最佳选择</p>
+              <p class="text-gray-400">The best choice for building modern Web applications</p>
             </div>
             
             <div>
-              <h3 class="font-semibold mb-4">产品</h3>
+              <h3 class="font-semibold mb-4">Product</h3>
               <ul class="space-y-2 text-gray-400">
-                <li><a href="#" class="hover:text-white transition-colors">功能特性</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">定价</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">模板</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Templates</a></li>
               </ul>
             </div>
             
             <div>
-              <h3 class="font-semibold mb-4">开发者</h3>
+              <h3 class="font-semibold mb-4">Developers</h3>
               <ul class="space-y-2 text-gray-400">
-                <li><a href="#" class="hover:text-white transition-colors">文档</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">API 参考</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">API Reference</a></li>
                 <li><a href="#" class="hover:text-white transition-colors">GitHub</a></li>
               </ul>
             </div>
             
             <div>
-              <h3 class="font-semibold mb-4">支持</h3>
+              <h3 class="font-semibold mb-4">Support</h3>
               <ul class="space-y-2 text-gray-400">
-                <li><a href="#" class="hover:text-white transition-colors">帮助中心</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">社区</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">联系我们</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
               </ul>
             </div>
           </div>
           
           <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p class="text-gray-400">© 2024 SolidApp. 保留所有权利。</p>
+            <p class="text-gray-400">© 2024 SolidApp. All rights reserved.</p>
             <div class="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" class="text-gray-400 hover:text-white transition-colors">服务条款</a>
-              <a href="#" class="text-gray-400 hover:text-white transition-colors">隐私政策</a>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
             </div>
           </div>
         </div>

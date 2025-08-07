@@ -7,7 +7,7 @@ import { logger } from './utils/logger.js'
 import { TEMPLATES } from './config/templates.js'
 
 /**
- * 主应用类
+ * Main application class
  */
 class CreateSolidApp {
   constructor() {
@@ -19,49 +19,49 @@ class CreateSolidApp {
   }
 
   /**
-   * 设置 CLI 命令
+   * Setup CLI commands
    */
   setupCLI() {
     this.program
       .name('create-solid-app')
-      .description('智能化的 TanStack Solid Start 项目脚手架')
+      .description('Intelligent TanStack Solid Start project scaffolding tool')
       .version('1.3.1')
 
     this.program
-      .argument('[project-name]', '项目名称')
-      .option('-t, --template <template>', '使用指定模板 (minimal|full-stack|admin|landing)')
-      .option('--skip-git', '跳过 Git 初始化')
-      .option('--skip-install', '跳过依赖安装')
+      .argument('[project-name]', 'Project name')
+      .option('-t, --template <template>', 'Use specified template (minimal|full-stack|admin|landing)')
+      .option('--skip-git', 'Skip Git initialization')
+      .option('--skip-install', 'Skip dependency installation')
       .action(this.handleCommand.bind(this))
   }
 
   /**
-   * 处理命令行输入
+   * Handle command line input
    */
   async handleCommand(projectName, options) {
     try {
-      // 验证模板选择
+      // Validate template selection
       await this.validateTemplateOption(options.template)
 
-      // 获取项目配置
+      // Get project configuration
       const config = await this.configManager.getProjectConfig(projectName, options)
       
-      // 创建项目
+      // Create project
       await this.projectCreator.createProject(config)
       
     } catch (error) {
-      logger.showError(error, '执行')
+      logger.showError(error, 'execution')
       process.exit(1)
     }
   }
 
   /**
-   * 验证模板选项
+   * Validate template option
    */
   async validateTemplateOption(template) {
     if (template && !TEMPLATES[template]) {
-      logger.error(`❌ 无效的模板: ${template}`)
-      logger.info('可用的模板:')
+      logger.error(`❌ Invalid template: ${template}`)
+      logger.info('Available templates:')
       Object.entries(TEMPLATES).forEach(([key, template]) => {
         logger.hint(`  • ${key} - ${template.name}`)
       })
@@ -70,13 +70,13 @@ class CreateSolidApp {
   }
 
   /**
-   * 运行应用
+   * Run application
    */
   run() {
     this.program.parse()
   }
 }
 
-// 运行应用
+// Run application
 const app = new CreateSolidApp()
 app.run()
