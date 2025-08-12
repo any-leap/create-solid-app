@@ -28,14 +28,20 @@ export async function getProjectPrompts(options = {}) {
     })
   }
   
-  questions.push(
-    {
-      type: 'multiselect',
-      name: 'features',
-      message: 'Select required feature modules:',
-      choices: getFeatureChoices(),
-      hint: 'Use space to select/deselect, Enter to confirm'
+  // Add feature selection conditionally based on template choice
+  questions.push({
+    type: (prev, answers) => {
+      const selectedTemplate = answers.template || options.template
+      const isRouterTemplate = selectedTemplate === 'start-bare' || selectedTemplate === 'start-basic'
+      return isRouterTemplate ? null : 'multiselect'
     },
+    name: 'features',
+    message: 'Select required feature modules:',
+    choices: getFeatureChoices(),
+    hint: 'Use space to select/deselect, Enter to confirm'
+  })
+  
+  questions.push(
     {
       type: 'text',
       name: 'description',
@@ -62,7 +68,16 @@ export async function getProjectPrompts(options = {}) {
     }
   )
 
-  return await prompts(questions, { onCancel })
+  const response = await prompts(questions, { onCancel })
+  
+  // For Router templates, provide empty features array since they don't use feature modules
+  const selectedTemplate = response.template || options.template
+  const isRouterTemplate = selectedTemplate === 'start-bare' || selectedTemplate === 'start-basic'
+  if (isRouterTemplate && !response.features) {
+    response.features = []
+  }
+  
+  return response
 }
 
 /**

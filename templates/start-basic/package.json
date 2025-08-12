@@ -1,0 +1,30 @@
+{
+  "name": "my-solid-app",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite dev",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@tanstack/solid-router": "^1.131.7",
+    "@tanstack/solid-router-devtools": "^1.131.7",
+    "@tanstack/solid-start": "^1.131.7",
+    "solid-js": "^1.9.5",
+    "redaxios": "^0.5.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "vite": "^6.3.5",
+    "vite-plugin-solid": "^2.11.7",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

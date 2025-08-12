@@ -29,7 +29,7 @@ class CreateSolidApp {
 
     this.program
       .argument('[project-name]', 'Project name')
-      .option('-t, --template <template>', 'Use specified template (minimal|full-stack|admin|landing)')
+      .option('-t, --template <template>', 'Use specified template (minimal|start-bare|start-basic|full-stack|admin|landing)')
       .option('--skip-git', 'Skip Git initialization')
       .option('--skip-install', 'Skip dependency installation')
       .action(this.handleCommand.bind(this))

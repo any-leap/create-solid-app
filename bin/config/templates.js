@@ -7,6 +7,16 @@ export const TEMPLATES = {
     description: 'Basic Solid Start application, perfect for rapid prototyping',
     features: ['typescript', 'tailwind']
   },
+  'start-bare': {
+    name: 'TanStack Router Bare',
+    description: 'Minimal TanStack Router example with basic routing and components',
+    features: ['typescript']
+  },
+  'start-basic': {
+    name: 'TanStack Router Basic',
+    description: 'Comprehensive TanStack Router example with advanced routing features, nested layouts, and API routes',
+    features: ['typescript', 'tailwind']
+  },
   'full-stack': {
     name: 'Full-stack Application',
     description: 'Complete full-stack application with database, authentication, and Docker configuration',
