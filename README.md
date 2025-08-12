@@ -89,7 +89,7 @@ bunx @any-l/create-solid-app my-awesome-app
 bunx @any-l/create-solid-app my-router-app --template start-basic
 
 # Interactive selection
-? Choose project template: 
+? Choose project template:
   Minimal Application
   TanStack Router Bare
 > TanStack Router Basic
@@ -132,18 +132,18 @@ bun run test       # Run tests
 bun run lint       # Code linting
 ```
 
-## 📋 系统要求
+## 📋 System Requirements
 
 - **Node.js** >= 18.0.0
-- **Bun** >= 1.0.0（推荐）或 **npm** >= 8.0.0
+- **Bun** >= 1.0.0 (recommended) or **npm** >= 8.0.0
 
-## 🏗️ 技术架构说明
+## 🏗️ Technical Architecture
 
-### 为什么选择 Bun + Node.js 混合架构？
+### Why Choose Bun + Node.js Hybrid Architecture?
 
-本脚手架采用 **Bun 作为包管理器 + Node.js 作为运行时** 的混合架构，原因如下：
+This scaffolding adopts a **Bun as package manager + Node.js as runtime** hybrid architecture for the following reasons:
 
-#### ✅ Bun 的优势（包管理）
+#### ✅ Bun Advantages (Package Management)
 
 - 🚀 **Ultra-fast Installation**: 10-20 times faster than npm/yarn
 - 📦 **Great Compatibility**: Fully compatible with npm ecosystem
