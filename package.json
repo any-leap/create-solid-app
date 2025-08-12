@@ -4,7 +4,7 @@
   "description": "Intelligent TanStack Solid Start project scaffolding tool",
   "type": "module",
   "bin": {
-    "create-solid-app": "./bin/create-app.js"
+    "create-solid-app": "bin/create-app.js"
   },
   "files": [
     "bin",
@@ -60,7 +60,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/any-leap/create-solid-app.git"
+    "url": "git+https://github.com/any-leap/create-solid-app.git"
   },
   "author": "Your Name <your.email@example.com>",
   "license": "MIT"
