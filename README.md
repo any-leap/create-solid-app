@@ -2,6 +2,8 @@
 
 > 🚀 Modern TanStack Solid Start project scaffolding tool
 
+English | [中文](./README-CN.md)
+
 ## 📦 Quick Start
 
 Using Bun (recommended):
@@ -19,7 +21,7 @@ npx @any-l/create-solid-app my-project
 ## ✨ Features
 
 - 🎨 **Interactive Configuration** - Customize project features based on your needs
-- ⚡ **Multiple Templates** - Minimal, Full-stack, Admin, Landing page
+- ⚡ **Multiple Templates** - Minimal, TanStack Router examples, Full-stack, Admin, Landing page
 - 🛠️ **Optional Feature Modules** - Database, Authentication, Docker, CI/CD, Testing
 - 📦 **Smart Dependency Management** - Install only necessary dependencies
 - 🔄 **Automated Configuration** - One-click generation of complete project structure
@@ -31,6 +33,21 @@ npx @any-l/create-solid-app my-project
 - Basic TanStack Solid Start configuration
 - TypeScript + Tailwind CSS
 - Development tooling setup
+
+### 🔥 TanStack Router Bare (start-bare)
+
+- Minimal TanStack Router example with basic routing
+- Essential routing components (Counter, About page)
+- Perfect for learning TanStack Router fundamentals
+- TypeScript support
+
+### 🛠️ TanStack Router Basic (start-basic)
+
+- Comprehensive TanStack Router example
+- Advanced routing features (nested layouts, API routes)
+- Route loaders, error boundaries, and middleware
+- TypeScript + Tailwind CSS
+- Complete routing showcase
 
 ### 🚀 Full-stack (full-stack)
 
@@ -68,9 +85,17 @@ npx @any-l/create-solid-app my-project
 # Create project
 bunx @any-l/create-solid-app my-awesome-app
 
-# Select template and features
-? Choose project template: Full Stack Application
-? Select feature modules: Database, Authentication, Docker
+# Quick start with specific template
+bunx @any-l/create-solid-app my-router-app --template start-basic
+
+# Interactive selection
+? Choose project template: 
+  Minimal Application
+  TanStack Router Bare
+> TanStack Router Basic
+  Full-stack Application
+  Admin Dashboard
+  Landing Page
 
 # Enter project directory
 cd my-awesome-app
@@ -234,7 +259,14 @@ MIT License
 
 ## 📝 Version History
 
-### v3.0.0 (Latest) - Major Update
+### v3.4.0 (Latest) - TanStack Router Integration
+
+- ✅ **New Templates**: Added TanStack Router bare and basic examples
+- ✅ **Official Examples**: Direct integration from TanStack Router repository
+- ✅ **Enhanced Templates**: start-bare for learning, start-basic for production
+- ✅ **Smart Prompts**: Automatic feature detection for Router templates
+
+### v3.0.0 - Major Update
 
 - ✅ **Fixed Core Issues**: Redesigned based on TanStack Start official documentation
 - ✅ **Bun + Node.js Architecture**: Best balance of performance and compatibility
